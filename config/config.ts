@@ -74,6 +74,23 @@ export default defineConfig({
               redirect: '/dashboard/analysis',
             },
             {
+              path: '/practice',
+              icon: 'smile',
+              name: 'practice',
+              routes: [
+                {
+                  path: '/',
+                  redirect: '/practice/chen',
+                },
+                {
+                  name: 'chen',
+                  icon: 'smile',
+                  path: '/practice/chen',
+                  component: './practice/lili',
+                },
+              ],
+            },
+            {
               path: '/dashboard',
               name: 'dashboard',
               icon: 'dashboard',
