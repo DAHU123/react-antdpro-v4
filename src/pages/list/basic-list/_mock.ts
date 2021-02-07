@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { Request, Response } from 'express';
-import { BasicListItemDataType } from './data.d';
+import type { Request, Response } from 'express'
+import type { BasicListItemDataType } from './data.d'
 
 const titles = [
   'Alipay',
@@ -11,7 +11,7 @@ const titles = [
   'React',
   'Vue',
   'Webpack',
-];
+]
 const avatars = [
   'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png', // Alipay
   'https://gw.alipayobjects.com/zos/rmsportal/zOsKZmFRdUtvpqCImOVY.png', // Angular
@@ -21,21 +21,21 @@ const avatars = [
   'https://gw.alipayobjects.com/zos/rmsportal/kZzEzemZyKLKFsojXItE.png', // React
   'https://gw.alipayobjects.com/zos/rmsportal/ComBAopevLwENQdKWiIn.png', // Vue
   'https://gw.alipayobjects.com/zos/rmsportal/nxkuOJlFJuAUhzlMTCEe.png', // Webpack
-];
+]
 
 const covers = [
   'https://gw.alipayobjects.com/zos/rmsportal/uMfMFlvUuceEyPpotzlq.png',
   'https://gw.alipayobjects.com/zos/rmsportal/iZBVOIhGJiAnhplqjvZW.png',
   'https://gw.alipayobjects.com/zos/rmsportal/iXjVmWVHbCJAyqvDxdtx.png',
   'https://gw.alipayobjects.com/zos/rmsportal/gLaIAoVWTtLbBWZNYEMg.png',
-];
+]
 const desc = [
   '那是一种内在的东西， 他们到达不了，也无法触及的',
   '希望是一个好东西，也许是最好的，好东西是不会消亡的',
   '生命就像一盒巧克力，结果往往出人意料',
   '城镇中有那么多的酒馆，她却偏偏走进了我的酒馆',
   '那时候我只会想自己想要什么，从不想自己拥有什么',
-];
+]
 
 const user = [
   '付小小',
@@ -48,10 +48,10 @@ const user = [
   '乐哥',
   '谭小仪',
   '仲尼',
-];
+]
 
 function fakeList(count: number): BasicListItemDataType[] {
-  const list = [];
+  const list = []
   for (let i = 0; i < count; i += 1) {
     list.push({
       id: `fake-list-${i}`,
@@ -59,7 +59,7 @@ function fakeList(count: number): BasicListItemDataType[] {
       title: titles[i % 8],
       avatar: avatars[i % 8],
       cover: parseInt(`${i / 4}`, 10) % 2 === 0 ? covers[i % 4] : covers[3 - (i % 4)],
-      status: ['active', 'exception', 'normal'][i % 3] as
+      status: [ 'active', 'exception', 'normal' ][i % 3] as
         | 'normal'
         | 'exception'
         | 'active'
@@ -96,57 +96,57 @@ function fakeList(count: number): BasicListItemDataType[] {
           id: 'member3',
         },
       ],
-    });
+    })
   }
 
-  return list;
+  return list
 }
 
-let sourceData: BasicListItemDataType[] = [];
+let sourceData: BasicListItemDataType[] = []
 
 function getFakeList(req: Request, res: Response) {
-  const params = req.query;
+  const params = req.query
 
-  const count = params.count * 1 || 20;
+  const count = params.count * 1 || 20
 
-  const result = fakeList(count);
-  sourceData = result;
-  return res.json(result);
+  const result = fakeList(count)
+  sourceData = result
+  return res.json(result)
 }
 
 function postFakeList(req: Request, res: Response) {
-  const { /* url = '', */ body } = req;
+  const { /* url = '', */ body } = req
   // const params = getUrlParams(url);
-  const { method, id } = body;
+  const { method, id } = body
   // const count = (params.count * 1) || 20;
-  let result = sourceData || [];
+  let result = sourceData || []
 
   switch (method) {
     case 'delete':
-      result = result.filter((item) => item.id !== id);
-      break;
+      result = result.filter((item) => item.id !== id)
+      break
     case 'update':
       result.forEach((item, i) => {
         if (item.id === id) {
-          result[i] = { ...item, ...body };
+          result[i] = { ...item, ...body }
         }
-      });
-      break;
+      })
+      break
     case 'post':
       result.unshift({
         ...body,
         id: `fake-list-${result.length}`,
         createdAt: new Date().getTime(),
-      });
-      break;
+      })
+      break
     default:
-      break;
+      break
   }
 
-  return res.json(result);
+  return res.json(result)
 }
 
 export default {
   'GET  /api/fake_list': getFakeList,
   'POST  /api/fake_list': postFakeList,
-};
+}

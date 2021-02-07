@@ -1,7 +1,7 @@
-import { FormattedMessage, formatMessage } from 'umi';
-import React, { Component } from 'react';
+import { FormattedMessage, formatMessage } from 'umi'
+import React, { Component } from 'react'
 
-import { List } from 'antd';
+import { List } from 'antd'
 
 type Unpacked<T> = T extends (infer U)[] ? U : T;
 
@@ -22,7 +22,7 @@ const passwordStrength = {
       Weak
     </span>
   ),
-};
+}
 
 class SecurityView extends Component {
   getData = () => [
@@ -85,7 +85,7 @@ class SecurityView extends Component {
   ];
 
   render() {
-    const data = this.getData();
+    const data = this.getData()
     return (
       <>
         <List<Unpacked<typeof data>>
@@ -98,8 +98,8 @@ class SecurityView extends Component {
           )}
         />
       </>
-    );
+    )
   }
 }
 
-export default SecurityView;
+export default SecurityView

@@ -1,8 +1,8 @@
-import { Divider } from 'antd';
-import React from 'react';
-import { Toolbar } from 'gg-editor';
-import ToolbarButton from './ToolbarButton';
-import styles from './index.less';
+import { Divider } from 'antd'
+import React from 'react'
+import { Toolbar } from 'gg-editor'
+import ToolbarButton from './ToolbarButton'
+import styles from './index.less'
 
 const FlowToolbar = () => (
   <Toolbar className={styles.toolbar}>
@@ -20,6 +20,6 @@ const FlowToolbar = () => (
     <ToolbarButton command="collapse" text="Fold" />
     <ToolbarButton command="expand" text="Unfold" />
   </Toolbar>
-);
+)
 
-export default FlowToolbar;
+export default FlowToolbar

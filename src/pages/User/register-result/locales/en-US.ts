@@ -20,4 +20,4 @@ export default {
   'userandregister-result.register-result.back-home': 'Back to home',
   'userandregister-result.register-result.view-mailbox': 'View mailbox',
   'userandregister-result.navBar.lang': 'Languages',
-};
+}

@@ -1,17 +1,18 @@
-import React, { Component } from 'react';
-import { Select, Spin } from 'antd';
-import { LabeledValue } from 'antd/es/select';
-import { connect, Dispatch } from 'umi';
-import { GeographicItemType } from '../data.d';
-import styles from './GeographicView.less';
+import React, { Component } from 'react'
+import { Select, Spin } from 'antd'
+import type { LabeledValue } from 'antd/es/select'
+import type { Dispatch } from 'umi'
+import { connect } from 'umi'
+import type { GeographicItemType } from '../data.d'
+import styles from './GeographicView.less'
 
-const { Option } = Select;
+const { Option } = Select
 
 const nullSelectItem: LabeledValue = {
   label: '',
   value: '',
   key: '',
-};
+}
 
 interface GeographicViewProps {
   dispatch?: Dispatch<any>;
@@ -27,41 +28,41 @@ interface GeographicViewProps {
 
 class GeographicView extends Component<GeographicViewProps> {
   componentDidMount = () => {
-    const { dispatch } = this.props;
+    const { dispatch } = this.props
     if (dispatch) {
       dispatch({
         type: 'accountAndsettings/fetchProvince',
-      });
+      })
     }
   };
 
   componentDidUpdate(props: GeographicViewProps) {
-    const { dispatch, value } = this.props;
+    const { dispatch, value } = this.props
 
     if (!props.value && !!value && !!value.province) {
       if (dispatch) {
         dispatch({
           type: 'accountAndsettings/fetchCity',
           payload: value.province.key,
-        });
+        })
       }
     }
   }
 
   getProvinceOption() {
-    const { province } = this.props;
+    const { province } = this.props
     if (province) {
-      return this.getOption(province);
+      return this.getOption(province)
     }
-    return [];
+    return []
   }
 
   getCityOption = () => {
-    const { city } = this.props;
+    const { city } = this.props
     if (city) {
-      return this.getOption(city);
+      return this.getOption(city)
     }
-    return [];
+    return []
   };
 
   getOption = (list: GeographicItemType[]) => {
@@ -70,60 +71,60 @@ class GeographicView extends Component<GeographicViewProps> {
         <Option key={0} value={0}>
           没有找到选项
         </Option>
-      );
+      )
     }
     return list.map((item) => (
       <Option key={item.id} value={item.id}>
         {item.name}
       </Option>
-    ));
+    ))
   };
 
   selectProvinceItem = (item: LabeledValue) => {
-    const { dispatch, onChange } = this.props;
+    const { dispatch, onChange } = this.props
 
     if (dispatch) {
       dispatch({
         type: 'accountAndsettings/fetchCity',
         payload: item.key,
-      });
+      })
     }
     if (onChange) {
       onChange({
         province: item,
         city: nullSelectItem,
-      });
+      })
     }
   };
 
   selectCityItem = (item: LabeledValue) => {
-    const { value, onChange } = this.props;
+    const { value, onChange } = this.props
     if (value && onChange) {
       onChange({
         province: value.province,
         city: item,
-      });
+      })
     }
   };
 
   conversionObject() {
-    const { value } = this.props;
+    const { value } = this.props
     if (!value) {
       return {
         province: nullSelectItem,
         city: nullSelectItem,
-      };
+      }
     }
-    const { province, city } = value;
+    const { province, city } = value
     return {
       province: province || nullSelectItem,
       city: city || nullSelectItem,
-    };
+    }
   }
 
   render() {
-    const { province, city } = this.conversionObject();
-    const { loading } = this.props;
+    const { province, city } = this.conversionObject()
+    const { loading } = this.props
 
     return (
       <Spin spinning={loading} wrapperClassName={styles.row}>
@@ -146,7 +147,7 @@ class GeographicView extends Component<GeographicViewProps> {
           {this.getCityOption()}
         </Select>
       </Spin>
-    );
+    )
   }
 }
 
@@ -161,11 +162,11 @@ export default connect(
     };
     loading: any;
   }) => {
-    const { province, city } = accountAndsettings;
+    const { province, city } = accountAndsettings
     return {
       province,
       city,
       loading: loading.models.accountAndsettings,
-    };
+    }
   },
-)(GeographicView);
+)(GeographicView)

@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { HeatmapLayer, MapboxScene, PointLayer } from '@antv/l7-react';
-import { PageLoading } from '@ant-design/pro-layout';
+import * as React from 'react'
+import { HeatmapLayer, MapboxScene, PointLayer } from '@antv/l7-react'
+import { PageLoading } from '@ant-design/pro-layout'
 
-const colors = ['#eff3ff', '#c6dbef', '#9ecae1', '#6baed6', '#4292c6', '#2171b5', '#084594'];
+const colors = [ '#eff3ff', '#c6dbef', '#9ecae1', '#6baed6', '#4292c6', '#2171b5', '#084594' ]
 export default class Map extends React.Component {
   state = {
     data: null,
@@ -11,29 +11,29 @@ export default class Map extends React.Component {
   };
 
   public async componentDidMount() {
-    const [geoData, gridData] = await Promise.all([
+    const [ geoData, gridData ] = await Promise.all([
       fetch(
         'https://gw.alipayobjects.com/os/bmw-prod/c5dba875-b6ea-4e88-b778-66a862906c93.json',
       ).then((d) => d.json()),
       fetch(
         'https://gw.alipayobjects.com/os/bmw-prod/8990e8b4-c58e-419b-afb9-8ea3daff2dd1.json',
       ).then((d) => d.json()),
-    ]);
+    ])
     this.setState({
       data: geoData,
       grid: gridData,
       loading: true,
-    });
+    })
   }
 
   public render() {
-    const { data, grid, loading } = this.state;
+    const { data, grid, loading } = this.state
     return loading === false ? (
       <PageLoading />
     ) : (
       <MapboxScene
         map={{
-          center: [110.19382669582967, 50.258134],
+          center: [ 110.19382669582967, 50.258134 ],
           pitch: 0,
           style: 'blank',
           zoom: 1,
@@ -105,7 +105,7 @@ export default class Map extends React.Component {
             }}
             size={{
               field: 'cum_conf',
-              values: [0, 30],
+              values: [ 0, 30 ],
             }}
             style={{
               opacity: 0.8,
@@ -126,7 +126,7 @@ export default class Map extends React.Component {
             filter={{
               field: 'cum_conf',
               values: (v) => {
-                return v > 2000;
+                return v > 2000
               },
             }}
             size={{
@@ -140,6 +140,6 @@ export default class Map extends React.Component {
           />,
         ]}
       </MapboxScene>
-    );
+    )
   }
 }

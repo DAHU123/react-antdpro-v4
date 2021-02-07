@@ -1,12 +1,12 @@
-import { DingdingOutlined } from '@ant-design/icons';
-import { Button, Card, Steps, Result, Descriptions } from 'antd';
-import { FormattedMessage, formatMessage } from 'umi';
-import React, { Fragment } from 'react';
-import { GridContent } from '@ant-design/pro-layout';
+import { DingdingOutlined } from '@ant-design/icons'
+import { Button, Card, Steps, Result, Descriptions } from 'antd'
+import { FormattedMessage, formatMessage } from 'umi'
+import React, { Fragment } from 'react'
+import { GridContent } from '@ant-design/pro-layout'
 
-import styles from './index.less';
+import styles from './index.less'
 
-const { Step } = Steps;
+const { Step } = Steps
 
 const desc1 = (
   <div className={styles.title}>
@@ -16,7 +16,7 @@ const desc1 = (
     </div>
     <div>2016-12-12 12:32</div>
   </div>
-);
+)
 
 const desc2 = (
   <div style={{ fontSize: 12 }} className={styles.title}>
@@ -28,7 +28,7 @@ const desc2 = (
       </a>
     </div>
   </div>
-);
+)
 
 const content = (
   <>
@@ -109,7 +109,7 @@ const content = (
       />
     </Steps>
   </>
-);
+)
 
 const extra = (
   <Fragment>
@@ -123,7 +123,7 @@ const extra = (
       <FormattedMessage id="resultandsuccess.success.btn-print" defaultMessage="Print" />
     </Button>
   </Fragment>
-);
+)
 
 export default () => (
   <GridContent>
@@ -139,4 +139,4 @@ export default () => (
       </Result>
     </Card>
   </GridContent>
-);
+)

@@ -1,8 +1,8 @@
-import { CanvasMenu, ContextMenu, NodeMenu } from 'gg-editor';
+import { CanvasMenu, ContextMenu, NodeMenu } from 'gg-editor'
 
-import React from 'react';
-import MenuItem from './MenuItem';
-import styles from './index.less';
+import React from 'react'
+import MenuItem from './MenuItem'
+import styles from './index.less'
 
 const MindContextMenu = () => (
   <ContextMenu className={styles.contextMenu}>
@@ -18,6 +18,6 @@ const MindContextMenu = () => (
       <MenuItem command="redo" />
     </CanvasMenu>
   </ContextMenu>
-);
+)
 
-export default MindContextMenu;
+export default MindContextMenu

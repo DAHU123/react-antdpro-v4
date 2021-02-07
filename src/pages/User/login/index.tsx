@@ -6,18 +6,18 @@ import {
   TaobaoCircleOutlined,
   UserOutlined,
   WeiboCircleOutlined,
-} from '@ant-design/icons';
-import { Alert, Space, message, Tabs } from 'antd';
-import React, { useState } from 'react';
-import ProForm, { ProFormCaptcha, ProFormCheckbox, ProFormText } from '@ant-design/pro-form';
-import { useIntl, connect, FormattedMessage } from 'umi';
-import { getFakeCaptcha } from '@/services/login';
-import type { Dispatch } from 'umi';
-import type { StateType } from '@/models/login';
-import type { LoginParamsType } from '@/services/login';
-import type { ConnectState } from '@/models/connect';
+} from '@ant-design/icons'
+import { Alert, Space, message, Tabs } from 'antd'
+import React, { useState } from 'react'
+import ProForm, { ProFormCaptcha, ProFormCheckbox, ProFormText } from '@ant-design/pro-form'
+import { useIntl, connect, FormattedMessage } from 'umi'
+import { getFakeCaptcha } from '@/services/login'
+import type { Dispatch } from 'umi'
+import type { StateType } from '@/models/login'
+import type { LoginParamsType } from '@/services/login'
+import type { ConnectState } from '@/models/connect'
 
-import styles from './index.less';
+import styles from './index.less'
 
 export type LoginProps = {
   dispatch: Dispatch;
@@ -36,21 +36,21 @@ const LoginMessage: React.FC<{
     type="error"
     showIcon
   />
-);
+)
 
 const Login: React.FC<LoginProps> = (props) => {
-  const { userLogin = {}, submitting } = props;
-  const { status, type: loginType } = userLogin;
-  const [type, setType] = useState<string>('account');
-  const intl = useIntl();
+  const { userLogin = {}, submitting } = props
+  const { status, type: loginType } = userLogin
+  const [ type, setType ] = useState<string>('account')
+  const intl = useIntl()
 
   const handleSubmit = (values: LoginParamsType) => {
-    const { dispatch } = props;
+    const { dispatch } = props
     dispatch({
       type: 'login/login',
       payload: { ...values, type },
-    });
-  };
+    })
+  }
   return (
     <div className={styles.main}>
       <ProForm
@@ -68,8 +68,8 @@ const Login: React.FC<LoginProps> = (props) => {
           },
         }}
         onFinish={(values) => {
-          handleSubmit(values as LoginParamsType);
-          return Promise.resolve();
+          handleSubmit(values as LoginParamsType)
+          return Promise.resolve()
         }}
       >
         <Tabs activeKey={type} onChange={setType}>
@@ -199,12 +199,12 @@ const Login: React.FC<LoginProps> = (props) => {
                   return `${count} ${intl.formatMessage({
                     id: 'pages.getCaptchaSecondText',
                     defaultMessage: '获取验证码',
-                  })}`;
+                  })}`
                 }
                 return intl.formatMessage({
                   id: 'pages.login.phoneLogin.getVerificationCode',
                   defaultMessage: '获取验证码',
-                });
+                })
               }}
               name="captcha"
               rules={[
@@ -219,11 +219,11 @@ const Login: React.FC<LoginProps> = (props) => {
                 },
               ]}
               onGetCaptcha={async (mobile) => {
-                const result = await getFakeCaptcha(mobile);
+                const result = await getFakeCaptcha(mobile)
                 if (result === false) {
-                  return;
+                  return
                 }
-                message.success('获取验证码成功！验证码为：1234');
+                message.success('获取验证码成功！验证码为：1234')
               }}
             />
           </>
@@ -252,10 +252,10 @@ const Login: React.FC<LoginProps> = (props) => {
         <WeiboCircleOutlined className={styles.icon} />
       </Space>
     </div>
-  );
-};
+  )
+}
 
 export default connect(({ login, loading }: ConnectState) => ({
   userLogin: login,
   submitting: loading.effects['login/login'],
-}))(Login);
+}))(Login)

@@ -1,14 +1,16 @@
-import { InfoCircleOutlined } from '@ant-design/icons';
-import { Button, Card, DatePicker, Input, Form, InputNumber, Radio, Select, Tooltip } from 'antd';
-import { connect, Dispatch, FormattedMessage, formatMessage } from 'umi';
-import React, { FC } from 'react';
-import { PageContainer } from '@ant-design/pro-layout';
-import styles from './style.less';
+import { InfoCircleOutlined } from '@ant-design/icons'
+import { Button, Card, DatePicker, Input, Form, InputNumber, Radio, Select, Tooltip } from 'antd'
+import type { Dispatch } from 'umi'
+import { connect, FormattedMessage, formatMessage } from 'umi'
+import type { FC } from 'react'
+import React from 'react'
+import { PageContainer } from '@ant-design/pro-layout'
+import styles from './style.less'
 
-const FormItem = Form.Item;
-const { Option } = Select;
-const { RangePicker } = DatePicker;
-const { TextArea } = Input;
+const FormItem = Form.Item
+const { Option } = Select
+const { RangePicker } = DatePicker
+const { TextArea } = Input
 
 interface BasicFormProps {
   submitting: boolean;
@@ -16,9 +18,9 @@ interface BasicFormProps {
 }
 
 const BasicForm: FC<BasicFormProps> = (props) => {
-  const { submitting } = props;
-  const [form] = Form.useForm();
-  const [showPublicUsers, setShowPublicUsers] = React.useState(false);
+  const { submitting } = props
+  const [ form ] = Form.useForm()
+  const [ showPublicUsers, setShowPublicUsers ] = React.useState(false)
   const formItemLayout = {
     labelCol: {
       xs: { span: 24 },
@@ -29,32 +31,32 @@ const BasicForm: FC<BasicFormProps> = (props) => {
       sm: { span: 12 },
       md: { span: 10 },
     },
-  };
+  }
 
   const submitFormLayout = {
     wrapperCol: {
       xs: { span: 24, offset: 0 },
       sm: { span: 10, offset: 7 },
     },
-  };
+  }
 
-  const onFinish = (values: { [key: string]: any }) => {
-    const { dispatch } = props;
+  const onFinish = (values: Record<string, any>) => {
+    const { dispatch } = props
     dispatch({
       type: 'formAndbasicForm/submitRegularForm',
       payload: values,
-    });
-  };
+    })
+  }
 
   const onFinishFailed = (errorInfo: any) => {
     // eslint-disable-next-line no-console
-    console.log('Failed:', errorInfo);
-  };
+    console.log('Failed:', errorInfo)
+  }
 
-  const onValuesChange = (changedValues: { [key: string]: any }) => {
-    const { publicType } = changedValues;
-    if (publicType) setShowPublicUsers(publicType === '2');
-  };
+  const onValuesChange = (changedValues: Record<string, any>) => {
+    const { publicType } = changedValues
+    if (publicType) setShowPublicUsers(publicType === '2')
+  }
 
   return (
     <PageContainer content={<FormattedMessage id="formandbasic-form.basic.description" />}>
@@ -236,9 +238,9 @@ const BasicForm: FC<BasicFormProps> = (props) => {
         </Form>
       </Card>
     </PageContainer>
-  );
-};
+  )
+}
 
-export default connect(({ loading }: { loading: { effects: { [key: string]: boolean } } }) => ({
+export default connect(({ loading }: { loading: { effects: Record<string, boolean> } }) => ({
   submitting: loading.effects['formAndbasicForm/submitRegularForm'],
-}))(BasicForm);
+}))(BasicForm)

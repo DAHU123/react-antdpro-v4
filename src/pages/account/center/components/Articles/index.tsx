@@ -1,15 +1,15 @@
-import { StarTwoTone, LikeOutlined, MessageFilled } from '@ant-design/icons';
-import { List, Tag } from 'antd';
-import React from 'react';
+import { StarTwoTone, LikeOutlined, MessageFilled } from '@ant-design/icons'
+import { List, Tag } from 'antd'
+import React from 'react'
 
-import { connect } from 'umi';
-import ArticleListContent from '../ArticleListContent';
-import { ListItemDataType } from '../../data.d';
-import { ModalState } from '../../model';
-import styles from './index.less';
+import { connect } from 'umi'
+import ArticleListContent from '../ArticleListContent'
+import type { ListItemDataType } from '../../data.d'
+import type { ModalState } from '../../model'
+import styles from './index.less'
 
 const Articles: React.FC<Partial<ModalState>> = (props) => {
-  const { list } = props;
+  const { list } = props
   const IconText: React.FC<{
     icon: React.ReactNode;
     text: React.ReactNode;
@@ -17,7 +17,7 @@ const Articles: React.FC<Partial<ModalState>> = (props) => {
     <span>
       {icon} {text}
     </span>
-  );
+  )
   return (
     <List<ListItemDataType>
       size="large"
@@ -52,9 +52,9 @@ const Articles: React.FC<Partial<ModalState>> = (props) => {
         </List.Item>
       )}
     />
-  );
-};
+  )
+}
 
 export default connect(({ accountAndcenter }: { accountAndcenter: ModalState }) => ({
   list: accountAndcenter.list,
-}))(Articles);
+}))(Articles)

@@ -1,12 +1,12 @@
-import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
-import { Avatar, Menu, Spin } from 'antd';
-import React from 'react';
-import type { ConnectProps } from 'umi';
-import { history, connect } from 'umi';
-import type { ConnectState } from '@/models/connect';
-import type { CurrentUser } from '@/models/user';
-import HeaderDropdown from '../HeaderDropdown';
-import styles from './index.less';
+import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons'
+import { Avatar, Menu, Spin } from 'antd'
+import React from 'react'
+import type { ConnectProps } from 'umi'
+import { history, connect } from 'umi'
+import type { ConnectState } from '@/models/connect'
+import type { CurrentUser } from '@/models/user'
+import HeaderDropdown from '../HeaderDropdown'
+import styles from './index.less'
 
 export type GlobalHeaderRightProps = {
   currentUser?: CurrentUser;
@@ -20,21 +20,21 @@ class AvatarDropdown extends React.Component<GlobalHeaderRightProps> {
     item: React.ReactInstance;
     domEvent: React.MouseEvent<HTMLElement>;
   }) => {
-    const { key } = event;
+    const { key } = event
 
     if (key === 'logout') {
-      const { dispatch } = this.props;
+      const { dispatch } = this.props
 
       if (dispatch) {
         dispatch({
           type: 'login/logout',
-        });
+        })
       }
 
-      return;
+      return
     }
 
-    history.push(`/account/${key}`);
+    history.push(`/account/${key}`)
   };
 
   render(): React.ReactNode {
@@ -44,7 +44,7 @@ class AvatarDropdown extends React.Component<GlobalHeaderRightProps> {
         name: '',
       },
       menu,
-    } = this.props;
+    } = this.props
     const menuHeaderDropdown = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={this.onMenuClick}>
         {menu && (
@@ -66,7 +66,7 @@ class AvatarDropdown extends React.Component<GlobalHeaderRightProps> {
           退出登录
         </Menu.Item>
       </Menu>
-    );
+    )
     return currentUser && currentUser.name ? (
       <HeaderDropdown overlay={menuHeaderDropdown}>
         <span className={`${styles.action} ${styles.account}`}>
@@ -84,10 +84,10 @@ class AvatarDropdown extends React.Component<GlobalHeaderRightProps> {
           }}
         />
       </span>
-    );
+    )
   }
 }
 
 export default connect(({ user }: ConnectState) => ({
   currentUser: user.currentUser,
-}))(AvatarDropdown);
+}))(AvatarDropdown)

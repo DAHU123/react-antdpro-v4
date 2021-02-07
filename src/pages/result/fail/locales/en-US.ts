@@ -8,4 +8,4 @@ export default {
   'resultandfail.error.hint-text2': 'Your account is not yet eligible to apply',
   'resultandfail.error.hint-btn2': 'Upgrade immediately',
   'resultandfail.error.btn-text': 'Return to modify',
-};
+}

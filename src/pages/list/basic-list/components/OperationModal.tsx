@@ -1,8 +1,9 @@
-import React, { FC, useEffect } from 'react';
-import moment from 'moment';
-import { Modal, Result, Button, Form, DatePicker, Input, Select } from 'antd';
-import { BasicListItemDataType } from '../data.d';
-import styles from '../style.less';
+import type { FC } from 'react'
+import React, { useEffect } from 'react'
+import moment from 'moment'
+import { Modal, Result, Button, Form, DatePicker, Input, Select } from 'antd'
+import type { BasicListItemDataType } from '../data.d'
+import styles from '../style.less'
 
 interface OperationModalProps {
   done: boolean;
@@ -13,45 +14,45 @@ interface OperationModalProps {
   onCancel: () => void;
 }
 
-const { TextArea } = Input;
+const { TextArea } = Input
 const formLayout = {
   labelCol: { span: 7 },
   wrapperCol: { span: 13 },
-};
+}
 
 const OperationModal: FC<OperationModalProps> = (props) => {
-  const [form] = Form.useForm();
-  const { done, visible, current, onDone, onCancel, onSubmit } = props;
+  const [ form ] = Form.useForm()
+  const { done, visible, current, onDone, onCancel, onSubmit } = props
 
   useEffect(() => {
     if (form && !visible) {
-      form.resetFields();
+      form.resetFields()
     }
-  }, [props.visible]);
+  }, [ props.visible ])
 
   useEffect(() => {
     if (current) {
       form.setFieldsValue({
         ...current,
         createdAt: current.createdAt ? moment(current.createdAt) : null,
-      });
+      })
     }
-  }, [props.current]);
+  }, [ props.current ])
 
   const handleSubmit = () => {
-    if (!form) return;
-    form.submit();
-  };
+    if (!form) return
+    form.submit()
+  }
 
-  const handleFinish = (values: { [key: string]: any }) => {
+  const handleFinish = (values: Record<string, any>) => {
     if (onSubmit) {
-      onSubmit(values as BasicListItemDataType);
+      onSubmit(values as BasicListItemDataType)
     }
-  };
+  }
 
   const modalFooter = done
     ? { footer: null, onCancel: onDone }
-    : { okText: '保存', onOk: handleSubmit, onCancel };
+    : { okText: '保存', onOk: handleSubmit, onCancel }
 
   const getModalContent = () => {
     if (done) {
@@ -67,21 +68,21 @@ const OperationModal: FC<OperationModalProps> = (props) => {
           }
           className={styles.formResult}
         />
-      );
+      )
     }
     return (
       <Form {...formLayout} form={form} onFinish={handleFinish}>
         <Form.Item
           name="title"
           label="任务名称"
-          rules={[{ required: true, message: '请输入任务名称' }]}
+          rules={[ { required: true, message: '请输入任务名称' } ]}
         >
           <Input placeholder="请输入" />
         </Form.Item>
         <Form.Item
           name="createdAt"
           label="开始时间"
-          rules={[{ required: true, message: '请选择开始时间' }]}
+          rules={[ { required: true, message: '请选择开始时间' } ]}
         >
           <DatePicker
             showTime
@@ -93,7 +94,7 @@ const OperationModal: FC<OperationModalProps> = (props) => {
         <Form.Item
           name="owner"
           label="任务负责人"
-          rules={[{ required: true, message: '请选择任务负责人' }]}
+          rules={[ { required: true, message: '请选择任务负责人' } ]}
         >
           <Select placeholder="请选择">
             <Select.Option value="付晓晓">付晓晓</Select.Option>
@@ -103,13 +104,13 @@ const OperationModal: FC<OperationModalProps> = (props) => {
         <Form.Item
           name="subDescription"
           label="产品描述"
-          rules={[{ message: '请输入至少五个字符的产品描述！', min: 5 }]}
+          rules={[ { message: '请输入至少五个字符的产品描述！', min: 5 } ]}
         >
           <TextArea rows={4} placeholder="请输入至少五个字符" />
         </Form.Item>
       </Form>
-    );
-  };
+    )
+  }
 
   return (
     <Modal
@@ -123,7 +124,7 @@ const OperationModal: FC<OperationModalProps> = (props) => {
     >
       {getModalContent()}
     </Modal>
-  );
-};
+  )
+}
 
-export default OperationModal;
+export default OperationModal

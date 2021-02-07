@@ -1,10 +1,11 @@
-import React from 'react';
-import { Form, Button, Divider, Input, Select } from 'antd';
-import { connect, Dispatch } from 'umi';
-import { StateType } from '../../model';
-import styles from './index.less';
+import React from 'react'
+import { Form, Button, Divider, Input, Select } from 'antd'
+import type { Dispatch } from 'umi'
+import { connect } from 'umi'
+import type { StateType } from '../../model'
+import styles from './index.less'
 
-const { Option } = Select;
+const { Option } = Select
 
 const formItemLayout = {
   labelCol: {
@@ -13,33 +14,33 @@ const formItemLayout = {
   wrapperCol: {
     span: 19,
   },
-};
+}
 interface Step1Props {
   data?: StateType['step'];
   dispatch?: Dispatch<any>;
 }
 
 const Step1: React.FC<Step1Props> = (props) => {
-  const { dispatch, data } = props;
-  const [form] = Form.useForm();
+  const { dispatch, data } = props
+  const [ form ] = Form.useForm()
 
   if (!data) {
-    return null;
+    return null
   }
-  const { validateFields } = form;
+  const { validateFields } = form
   const onValidateForm = async () => {
-    const values = await validateFields();
+    const values = await validateFields()
     if (dispatch) {
       dispatch({
         type: 'formAndstepForm/saveStepFormData',
         payload: values,
-      });
+      })
       dispatch({
         type: 'formAndstepForm/saveCurrentStep',
         payload: 'confirm',
-      });
+      })
     }
-  };
+  }
   return (
     <>
       <Form
@@ -53,7 +54,7 @@ const Step1: React.FC<Step1Props> = (props) => {
         <Form.Item
           label="付款账户"
           name="payAccount"
-          rules={[{ required: true, message: '请选择付款账户' }]}
+          rules={[ { required: true, message: '请选择付款账户' } ]}
         >
           <Select placeholder="test@example.com">
             <Option value="ant-design@alipay.com">ant-design@alipay.com</Option>
@@ -80,7 +81,7 @@ const Step1: React.FC<Step1Props> = (props) => {
         <Form.Item
           label="收款人姓名"
           name="receiverName"
-          rules={[{ required: true, message: '请输入收款人姓名' }]}
+          rules={[ { required: true, message: '请输入收款人姓名' } ]}
         >
           <Input placeholder="请输入收款人姓名" />
         </Form.Item>
@@ -124,9 +125,9 @@ const Step1: React.FC<Step1Props> = (props) => {
         </p>
       </div>
     </>
-  );
-};
+  )
+}
 
 export default connect(({ formAndstepForm }: { formAndstepForm: StateType }) => ({
   data: formAndstepForm.step,
-}))(Step1);
+}))(Step1)

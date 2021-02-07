@@ -1,8 +1,8 @@
-import { Item, ItemPanel } from 'gg-editor';
+import { Item, ItemPanel } from 'gg-editor'
 
-import { Card } from 'antd';
-import React from 'react';
-import styles from './index.less';
+import { Card } from 'antd'
+import React from 'react'
+import styles from './index.less'
 
 const FlowItemPanel = () => (
   <ItemPanel className={styles.itemPanel}>
@@ -49,6 +49,6 @@ const FlowItemPanel = () => (
       />
     </Card>
   </ItemPanel>
-);
+)
 
-export default FlowItemPanel;
+export default FlowItemPanel

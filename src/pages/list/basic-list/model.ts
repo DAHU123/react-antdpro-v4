@@ -1,7 +1,7 @@
-import { Effect, Reducer } from 'umi';
-import { addFakeList, queryFakeList, removeFakeList, updateFakeList } from './service';
+import type { Effect, Reducer } from 'umi'
+import { addFakeList, queryFakeList, removeFakeList, updateFakeList } from './service'
 
-import { BasicListItemDataType } from './data.d';
+import type { BasicListItemDataType } from './data.d'
 
 export interface StateType {
   list: BasicListItemDataType[];
@@ -30,31 +30,31 @@ const Model: ModelType = {
 
   effects: {
     *fetch({ payload }, { call, put }) {
-      const response = yield call(queryFakeList, payload);
+      const response = yield call(queryFakeList, payload)
       yield put({
         type: 'queryList',
         payload: Array.isArray(response) ? response : [],
-      });
+      })
     },
     *appendFetch({ payload }, { call, put }) {
-      const response = yield call(queryFakeList, payload);
+      const response = yield call(queryFakeList, payload)
       yield put({
         type: 'appendList',
         payload: Array.isArray(response) ? response : [],
-      });
+      })
     },
     *submit({ payload }, { call, put }) {
-      let callback;
+      let callback
       if (payload.id) {
-        callback = Object.keys(payload).length === 1 ? removeFakeList : updateFakeList;
+        callback = Object.keys(payload).length === 1 ? removeFakeList : updateFakeList
       } else {
-        callback = addFakeList;
+        callback = addFakeList
       }
-      const response = yield call(callback, payload); // post
+      const response = yield call(callback, payload) // post
       yield put({
         type: 'queryList',
         payload: response,
-      });
+      })
     },
   },
 
@@ -63,15 +63,15 @@ const Model: ModelType = {
       return {
         ...state,
         list: action.payload,
-      };
+      }
     },
     appendList(state = { list: [] }, action) {
       return {
         ...state,
         list: state.list.concat(action.payload),
-      };
+      }
     },
   },
-};
+}
 
-export default Model;
+export default Model

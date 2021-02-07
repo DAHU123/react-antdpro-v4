@@ -1,14 +1,15 @@
-import { PlusOutlined } from '@ant-design/icons';
-import { Button, Card, List, Typography } from 'antd';
-import React, { Component } from 'react';
+import { PlusOutlined } from '@ant-design/icons'
+import { Button, Card, List, Typography } from 'antd'
+import React, { Component } from 'react'
 
-import { PageContainer } from '@ant-design/pro-layout';
-import { connect, Dispatch } from 'umi';
-import { StateType } from './model';
-import { CardListItemDataType } from './data.d';
-import styles from './style.less';
+import { PageContainer } from '@ant-design/pro-layout'
+import type { Dispatch } from 'umi'
+import { connect } from 'umi'
+import type { StateType } from './model'
+import type { CardListItemDataType } from './data.d'
+import styles from './style.less'
 
-const { Paragraph } = Typography;
+const { Paragraph } = Typography
 
 interface CardListProps {
   listAndcardList: StateType;
@@ -23,20 +24,20 @@ interface CardListState {
 
 class CardList extends Component<CardListProps, CardListState> {
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { dispatch } = this.props
     dispatch({
       type: 'listAndcardList/fetch',
       payload: {
         count: 8,
       },
-    });
+    })
   }
 
   render() {
     const {
       listAndcardList: { list },
       loading,
-    } = this.props;
+    } = this.props
 
     const content = (
       <div className={styles.pageHeaderContent}>
@@ -59,7 +60,7 @@ class CardList extends Component<CardListProps, CardListState> {
           </a>
         </div>
       </div>
-    );
+    )
 
     const extraContent = (
       <div className={styles.extraImg}>
@@ -68,8 +69,8 @@ class CardList extends Component<CardListProps, CardListState> {
           src="https://gw.alipayobjects.com/zos/rmsportal/RzwpdLnhmvDJToTdfDPe.png"
         />
       </div>
-    );
-    const nullData: Partial<CardListItemDataType> = {};
+    )
+    const nullData: Partial<CardListItemDataType> = {}
     return (
       <PageContainer content={content} extraContent={extraContent}>
         <div className={styles.cardList}>
@@ -85,7 +86,7 @@ class CardList extends Component<CardListProps, CardListState> {
               xl: 4,
               xxl: 4,
             }}
-            dataSource={[nullData, ...list]}
+            dataSource={[ nullData, ...list ]}
             renderItem={(item) => {
               if (item && item.id) {
                 return (
@@ -93,7 +94,7 @@ class CardList extends Component<CardListProps, CardListState> {
                     <Card
                       hoverable
                       className={styles.card}
-                      actions={[<a key="option1">操作一</a>, <a key="option2">操作二</a>]}
+                      actions={[ <a key="option1">操作一</a>, <a key="option2">操作二</a> ]}
                     >
                       <Card.Meta
                         avatar={<img alt="" className={styles.cardAvatar} src={item.avatar} />}
@@ -106,7 +107,7 @@ class CardList extends Component<CardListProps, CardListState> {
                       />
                     </Card>
                   </List.Item>
-                );
+                )
               }
               return (
                 <List.Item>
@@ -114,12 +115,12 @@ class CardList extends Component<CardListProps, CardListState> {
                     <PlusOutlined /> 新增产品
                   </Button>
                 </List.Item>
-              );
+              )
             }}
           />
         </div>
       </PageContainer>
-    );
+    )
   }
 }
 
@@ -130,10 +131,10 @@ export default connect(
   }: {
     listAndcardList: StateType;
     loading: {
-      models: { [key: string]: boolean };
+      models: Record<string, boolean>;
     };
   }) => ({
     listAndcardList,
     loading: loading.models.listAndcardList,
   }),
-)(CardList);
+)(CardList)

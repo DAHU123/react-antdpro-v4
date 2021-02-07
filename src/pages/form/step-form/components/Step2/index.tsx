@@ -1,8 +1,9 @@
-import React from 'react';
-import { Form, Alert, Button, Descriptions, Divider, Statistic, Input } from 'antd';
-import { connect, Dispatch } from 'umi';
-import { StateType } from '../../model';
-import styles from './index.less';
+import React from 'react'
+import { Form, Alert, Button, Descriptions, Divider, Statistic, Input } from 'antd'
+import type { Dispatch } from 'umi'
+import { connect } from 'umi'
+import type { StateType } from '../../model'
+import styles from './index.less'
 
 const formItemLayout = {
   labelCol: {
@@ -11,7 +12,7 @@ const formItemLayout = {
   wrapperCol: {
     span: 19,
   },
-};
+}
 interface Step2Props {
   data?: StateType['step'];
   dispatch?: Dispatch<any>;
@@ -19,30 +20,30 @@ interface Step2Props {
 }
 
 const Step2: React.FC<Step2Props> = (props) => {
-  const [form] = Form.useForm();
-  const { data, dispatch, submitting } = props;
+  const [ form ] = Form.useForm()
+  const { data, dispatch, submitting } = props
   if (!data) {
-    return null;
+    return null
   }
-  const { validateFields, getFieldsValue } = form;
+  const { validateFields, getFieldsValue } = form
   const onPrev = () => {
     if (dispatch) {
-      const values = getFieldsValue();
+      const values = getFieldsValue()
       dispatch({
         type: 'formAndstepForm/saveStepFormData',
         payload: {
           ...data,
           ...values,
         },
-      });
+      })
       dispatch({
         type: 'formAndstepForm/saveCurrentStep',
         payload: 'info',
-      });
+      })
     }
-  };
+  }
   const onValidateForm = async () => {
-    const values = await validateFields();
+    const values = await validateFields()
     if (dispatch) {
       dispatch({
         type: 'formAndstepForm/submitStepForm',
@@ -50,11 +51,11 @@ const Step2: React.FC<Step2Props> = (props) => {
           ...data,
           ...values,
         },
-      });
+      })
     }
-  };
+  }
 
-  const { payAccount, receiverAccount, receiverName, amount } = data;
+  const { payAccount, receiverAccount, receiverName, amount } = data
   return (
     <Form
       {...formItemLayout}
@@ -82,7 +83,7 @@ const Step2: React.FC<Step2Props> = (props) => {
         label="支付密码"
         name="password"
         required={false}
-        rules={[{ required: true, message: '需要支付密码才能进行支付' }]}
+        rules={[ { required: true, message: '需要支付密码才能进行支付' } ]}
       >
         <Input type="password" autoComplete="off" style={{ width: '80%' }} />
       </Form.Item>
@@ -104,8 +105,8 @@ const Step2: React.FC<Step2Props> = (props) => {
         </Button>
       </Form.Item>
     </Form>
-  );
-};
+  )
+}
 export default connect(
   ({
     formAndstepForm,
@@ -113,10 +114,10 @@ export default connect(
   }: {
     formAndstepForm: StateType;
     loading: {
-      effects: { [key: string]: boolean };
+      effects: Record<string, boolean>;
     };
   }) => ({
     submitting: loading.effects['formAndstepForm/submitStepForm'],
     data: formAndstepForm.step,
   }),
-)(Step2);
+)(Step2)

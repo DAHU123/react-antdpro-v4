@@ -1,23 +1,23 @@
-import { Card, Col, DatePicker, Row, Tabs } from 'antd';
-import { FormattedMessage, formatMessage } from 'umi';
-import { RangePickerProps } from 'antd/es/date-picker/generatePicker';
-import moment from 'moment';
+import { Card, Col, DatePicker, Row, Tabs } from 'antd'
+import { FormattedMessage, formatMessage } from 'umi'
+import type { RangePickerProps } from 'antd/es/date-picker/generatePicker'
+import type moment from 'moment'
 
-import React from 'react';
-import numeral from 'numeral';
-import { VisitDataType } from '../data.d';
-import { Bar } from './Charts';
-import styles from '../style.less';
+import React from 'react'
+import numeral from 'numeral'
+import type { VisitDataType } from '../data.d'
+import { Bar } from './Charts'
+import styles from '../style.less'
 
-const { RangePicker } = DatePicker;
-const { TabPane } = Tabs;
+const { RangePicker } = DatePicker
+const { TabPane } = Tabs
 
-const rankingListData: { title: string; total: number }[] = [];
+const rankingListData: { title: string; total: number }[] = []
 for (let i = 0; i < 7; i += 1) {
   rankingListData.push({
     title: formatMessage({ id: 'dashboardandanalysis.analysis.test' }, { no: i }),
     total: 323234,
-  });
+  })
 }
 
 type RangePickerValue = RangePickerProps<moment.Moment>['value'];
@@ -173,6 +173,6 @@ const SalesCard = ({
       </Tabs>
     </div>
   </Card>
-);
+)
 
-export default SalesCard;
+export default SalesCard

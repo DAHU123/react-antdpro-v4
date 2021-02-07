@@ -1,7 +1,7 @@
-import { FormattedMessage, formatMessage } from 'umi';
-import { AlipayOutlined, DingdingOutlined, TaobaoOutlined } from '@ant-design/icons';
-import { List } from 'antd';
-import React, { Component, Fragment } from 'react';
+import { FormattedMessage, formatMessage } from 'umi'
+import { AlipayOutlined, DingdingOutlined, TaobaoOutlined } from '@ant-design/icons'
+import { List } from 'antd'
+import React, { Component, Fragment } from 'react'
 
 class BindingView extends Component {
   getData = () => [
@@ -54,8 +54,8 @@ class BindingView extends Component {
           )}
         />
       </Fragment>
-    );
+    )
   }
 }
 
-export default BindingView;
+export default BindingView

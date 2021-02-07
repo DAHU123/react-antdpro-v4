@@ -1,8 +1,8 @@
-import { CanvasMenu, ContextMenu, EdgeMenu, GroupMenu, MultiMenu, NodeMenu } from 'gg-editor';
+import { CanvasMenu, ContextMenu, EdgeMenu, GroupMenu, MultiMenu, NodeMenu } from 'gg-editor'
 
-import React from 'react';
-import MenuItem from './MenuItem';
-import styles from './index.less';
+import React from 'react'
+import MenuItem from './MenuItem'
+import styles from './index.less'
 
 const FlowContextMenu = () => (
   <ContextMenu className={styles.contextMenu}>
@@ -30,6 +30,6 @@ const FlowContextMenu = () => (
       <MenuItem command="pasteHere" icon="paste" text="Paste Here" />
     </CanvasMenu>
   </ContextMenu>
-);
+)
 
-export default FlowContextMenu;
+export default FlowContextMenu

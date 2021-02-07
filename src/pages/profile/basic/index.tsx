@@ -1,10 +1,11 @@
-import { Badge, Card, Descriptions, Divider, Table } from 'antd';
-import React, { Component } from 'react';
+import { Badge, Card, Descriptions, Divider, Table } from 'antd'
+import React, { Component } from 'react'
 
-import { PageContainer } from '@ant-design/pro-layout';
-import { connect, Dispatch } from 'umi';
-import { BasicProfileDataType } from './data.d';
-import styles from './style.less';
+import { PageContainer } from '@ant-design/pro-layout'
+import type { Dispatch } from 'umi'
+import { connect } from 'umi'
+import type { BasicProfileDataType } from './data.d'
+import styles from './style.less'
 
 const progressColumns = [
   {
@@ -23,9 +24,9 @@ const progressColumns = [
     key: 'status',
     render: (text: string) => {
       if (text === 'success') {
-        return <Badge status="success" text="成功" />;
+        return <Badge status="success" text="成功" />
       }
-      return <Badge status="processing" text="进行中" />;
+      return <Badge status="processing" text="进行中" />
     },
   },
 
@@ -39,7 +40,7 @@ const progressColumns = [
     dataIndex: 'cost',
     key: 'cost',
   },
-];
+]
 
 interface BasicProps {
   loading: boolean;
@@ -52,28 +53,28 @@ interface BasicState {
 
 class Basic extends Component<BasicProps, BasicState> {
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { dispatch } = this.props
     dispatch({
       type: 'profileAndbasic/fetchBasic',
-    });
+    })
   }
 
   render() {
-    const { profileAndbasic, loading } = this.props;
-    const { basicGoods, basicProgress } = profileAndbasic;
-    let goodsData: typeof basicGoods = [];
+    const { profileAndbasic, loading } = this.props
+    const { basicGoods, basicProgress } = profileAndbasic
+    let goodsData: typeof basicGoods = []
     if (basicGoods.length) {
-      let num = 0;
-      let amount = 0;
+      let num = 0
+      let amount = 0
       basicGoods.forEach((item) => {
-        num += Number(item.num);
-        amount += Number(item.amount);
-      });
+        num += Number(item.num)
+        amount += Number(item.amount)
+      })
       goodsData = basicGoods.concat({
         id: '总计',
         num,
         amount,
-      });
+      })
     }
     const renderContent = (value: any, row: any, index: any) => {
       const obj: {
@@ -82,12 +83,12 @@ class Basic extends Component<BasicProps, BasicState> {
       } = {
         children: value,
         props: {},
-      };
-      if (index === basicGoods.length) {
-        obj.props.colSpan = 0;
       }
-      return obj;
-    };
+      if (index === basicGoods.length) {
+        obj.props.colSpan = 0
+      }
+      return obj
+    }
     const goodsColumns = [
       {
         title: '商品编号',
@@ -95,14 +96,14 @@ class Basic extends Component<BasicProps, BasicState> {
         key: 'id',
         render: (text: React.ReactNode, row: any, index: number) => {
           if (index < basicGoods.length) {
-            return <a href="">{text}</a>;
+            return <a href="">{text}</a>
           }
           return {
             children: <span style={{ fontWeight: 600 }}>总计</span>,
             props: {
               colSpan: 4,
             },
-          };
+          }
         },
       },
       {
@@ -131,9 +132,9 @@ class Basic extends Component<BasicProps, BasicState> {
         align: 'right' as 'left' | 'right' | 'center',
         render: (text: React.ReactNode, row: any, index: number) => {
           if (index < basicGoods.length) {
-            return text;
+            return text
           }
-          return <span style={{ fontWeight: 600 }}>{text}</span>;
+          return <span style={{ fontWeight: 600 }}>{text}</span>
         },
       },
       {
@@ -143,12 +144,12 @@ class Basic extends Component<BasicProps, BasicState> {
         align: 'right' as 'left' | 'right' | 'center',
         render: (text: React.ReactNode, row: any, index: number) => {
           if (index < basicGoods.length) {
-            return text;
+            return text
           }
-          return <span style={{ fontWeight: 600 }}>{text}</span>;
+          return <span style={{ fontWeight: 600 }}>{text}</span>
         },
       },
-    ];
+    ]
     return (
       <PageContainer>
         <Card bordered={false}>
@@ -186,7 +187,7 @@ class Basic extends Component<BasicProps, BasicState> {
           />
         </Card>
       </PageContainer>
-    );
+    )
   }
 }
 
@@ -197,10 +198,10 @@ export default connect(
   }: {
     profileAndbasic: BasicProfileDataType;
     loading: {
-      effects: { [key: string]: boolean };
+      effects: Record<string, boolean>;
     };
   }) => ({
     profileAndbasic,
     loading: loading.effects['profileAndbasic/fetchBasic'],
   }),
-)(Basic);
+)(Basic)

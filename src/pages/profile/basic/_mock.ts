@@ -31,7 +31,7 @@ const basicGoods = [
     num: '3',
     amount: '25.50',
   },
-];
+]
 
 const basicProgress = [
   {
@@ -74,13 +74,13 @@ const basicProgress = [
     operator: '用户',
     cost: '5mins',
   },
-];
+]
 
 const getProfileBasicData = {
   basicGoods,
   basicProgress,
-};
+}
 
 export default {
   'GET  /api/profile/basic': getProfileBasicData,
-};
+}

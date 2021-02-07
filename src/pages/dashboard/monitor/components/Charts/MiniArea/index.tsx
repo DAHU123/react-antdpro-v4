@@ -1,8 +1,9 @@
-import { Axis, AxisProps, Chart, Geom, Tooltip } from 'bizcharts';
+import type { AxisProps } from 'bizcharts'
+import { Axis, Chart, Geom, Tooltip } from 'bizcharts'
 
-import React from 'react';
-import autoHeight from '../autoHeight';
-import styles from '../index.less';
+import React from 'react'
+import autoHeight from '../autoHeight'
+import styles from '../index.less'
 
 export interface MiniAreaProps {
   color?: string;
@@ -41,21 +42,21 @@ const MiniArea: React.FC<MiniAreaProps> = (props) => {
     xAxis,
     yAxis,
     animate = true,
-  } = props;
+  } = props
 
-  const padding: [number, number, number, number] = [36, 5, 30, 5];
+  const padding: [number, number, number, number] = [ 36, 5, 30, 5 ]
 
   const scaleProps = {
     x: {
       type: 'cat',
-      range: [0, 1],
+      range: [ 0, 1 ],
       ...scale.x,
     },
     y: {
       min: 0,
       ...scale.y,
     },
-  };
+  }
 
   const tooltip: [string, (...args: any[]) => { name?: string; value: string }] = [
     'x*y',
@@ -63,9 +64,9 @@ const MiniArea: React.FC<MiniAreaProps> = (props) => {
       name: x,
       value: y,
     }),
-  ];
+  ]
 
-  const chartHeight = height + 54;
+  const chartHeight = height + 54
 
   return (
     <div className={styles.miniChart} style={{ height }}>
@@ -124,7 +125,7 @@ const MiniArea: React.FC<MiniAreaProps> = (props) => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default autoHeight()(MiniArea);
+export default autoHeight()(MiniArea)

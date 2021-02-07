@@ -1,15 +1,16 @@
-import { PlusOutlined, HomeOutlined, ContactsOutlined, ClusterOutlined } from '@ant-design/icons';
-import { Avatar, Card, Col, Divider, Input, Row, Tag } from 'antd';
-import React, { Component, useState, useRef } from 'react';
-import { GridContent } from '@ant-design/pro-layout';
-import { Link, connect, Dispatch } from 'umi';
-import { RouteChildrenProps } from 'react-router';
-import { ModalState } from './model';
-import Projects from './components/Projects';
-import Articles from './components/Articles';
-import Applications from './components/Applications';
-import { CurrentUser, TagType } from './data.d';
-import styles from './Center.less';
+import { PlusOutlined, HomeOutlined, ContactsOutlined, ClusterOutlined } from '@ant-design/icons'
+import { Avatar, Card, Col, Divider, Input, Row, Tag } from 'antd'
+import React, { Component, useState, useRef } from 'react'
+import { GridContent } from '@ant-design/pro-layout'
+import type { Dispatch } from 'umi'
+import { Link, connect } from 'umi'
+import type { RouteChildrenProps } from 'react-router'
+import type { ModalState } from './model'
+import Projects from './components/Projects'
+import Articles from './components/Articles'
+import Applications from './components/Applications'
+import type { CurrentUser, TagType } from './data.d'
+import styles from './Center.less'
 
 const operationTabList = [
   {
@@ -36,7 +37,7 @@ const operationTabList = [
       </span>
     ),
   },
-];
+]
 
 interface CenterProps extends RouteChildrenProps {
   dispatch: Dispatch<any>;
@@ -48,32 +49,32 @@ interface CenterState {
 }
 
 const TagList: React.FC<{ tags: CurrentUser['tags'] }> = ({ tags }) => {
-  const ref = useRef<Input | null>(null);
-  const [newTags, setNewTags] = useState<TagType[]>([]);
-  const [inputVisible, setInputVisible] = useState<boolean>(false);
-  const [inputValue, setInputValue] = useState<string>('');
+  const ref = useRef<Input | null>(null)
+  const [ newTags, setNewTags ] = useState<TagType[]>([])
+  const [ inputVisible, setInputVisible ] = useState<boolean>(false)
+  const [ inputValue, setInputValue ] = useState<string>('')
 
   const showInput = () => {
-    setInputVisible(true);
+    setInputVisible(true)
     if (ref.current) {
       // eslint-disable-next-line no-unused-expressions
-      ref.current?.focus();
+      ref.current?.focus()
     }
-  };
+  }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-  };
+    setInputValue(e.target.value)
+  }
 
   const handleInputConfirm = () => {
-    let tempsTags = [...newTags];
+    let tempsTags = [ ...newTags ]
     if (inputValue && tempsTags.filter((tag) => tag.label === inputValue).length === 0) {
-      tempsTags = [...tempsTags, { key: `new-${tempsTags.length}`, label: inputValue }];
+      tempsTags = [ ...tempsTags, { key: `new-${tempsTags.length}`, label: inputValue } ]
     }
-    setNewTags(tempsTags);
-    setInputVisible(false);
-    setInputValue('');
-  };
+    setNewTags(tempsTags)
+    setInputVisible(false)
+    setInputValue('')
+  }
 
   return (
     <div className={styles.tags}>
@@ -99,8 +100,8 @@ const TagList: React.FC<{ tags: CurrentUser['tags'] }> = ({ tags }) => {
         </Tag>
       )}
     </div>
-  );
-};
+  )
+}
 
 class Center extends Component<CenterProps, CenterState> {
   // static getDerivedStateFromProps(
@@ -128,13 +129,13 @@ class Center extends Component<CenterProps, CenterState> {
   public input: Input | null | undefined = undefined;
 
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { dispatch } = this.props
     dispatch({
       type: 'accountAndcenter/fetchCurrent',
-    });
+    })
     dispatch({
       type: 'accountAndcenter/fetch',
-    });
+    })
   }
 
   onTabChange = (key: string) => {
@@ -143,20 +144,20 @@ class Center extends Component<CenterProps, CenterState> {
     // router.push(`${match.url}/${key}`);
     this.setState({
       tabKey: key as CenterState['tabKey'],
-    });
+    })
   };
 
   renderChildrenByTabKey = (tabKey: CenterState['tabKey']) => {
     if (tabKey === 'projects') {
-      return <Projects />;
+      return <Projects />
     }
     if (tabKey === 'applications') {
-      return <Applications />;
+      return <Applications />
     }
     if (tabKey === 'articles') {
-      return <Articles />;
+      return <Articles />
     }
-    return null;
+    return null
   };
 
   renderUserInfo = (currentUser: Partial<CurrentUser>) => (
@@ -198,9 +199,9 @@ class Center extends Component<CenterProps, CenterState> {
   );
 
   render() {
-    const { tabKey } = this.state;
-    const { currentUser = {}, currentUserLoading } = this.props;
-    const dataLoading = currentUserLoading || !(currentUser && Object.keys(currentUser).length);
+    const { tabKey } = this.state
+    const { currentUser = {}, currentUserLoading } = this.props
+    const dataLoading = currentUserLoading || !(currentUser && Object.keys(currentUser).length)
     return (
       <GridContent>
         <Row gutter={24}>
@@ -248,7 +249,7 @@ class Center extends Component<CenterProps, CenterState> {
           </Col>
         </Row>
       </GridContent>
-    );
+    )
   }
 }
 
@@ -257,10 +258,10 @@ export default connect(
     loading,
     accountAndcenter,
   }: {
-    loading: { effects: { [key: string]: boolean } };
+    loading: { effects: Record<string, boolean> };
     accountAndcenter: ModalState;
   }) => ({
     currentUser: accountAndcenter.currentUser,
     currentUserLoading: loading.effects['accountAndcenter/fetchCurrent'],
   }),
-)(Center);
+)(Center)

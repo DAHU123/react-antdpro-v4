@@ -58,4 +58,4 @@ export default {
     'The to-do list will be notified in the form of a letter from the station',
   'accountandsettings.settings.open': 'Open',
   'accountandsettings.settings.close': 'Close',
-};
+}

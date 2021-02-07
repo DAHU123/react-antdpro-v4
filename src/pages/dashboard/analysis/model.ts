@@ -1,7 +1,7 @@
-import { Effect, Reducer } from 'umi';
+import type { Effect, Reducer } from 'umi'
 
-import { AnalysisData } from './data.d';
-import { fakeChartData } from './service';
+import type { AnalysisData } from './data.d'
+import { fakeChartData } from './service'
 
 export interface ModelType {
   namespace: string;
@@ -27,7 +27,7 @@ const initState = {
   salesTypeDataOnline: [],
   salesTypeDataOffline: [],
   radarData: [],
-};
+}
 
 const Model: ModelType = {
   namespace: 'dashboardAndanalysis',
@@ -36,20 +36,20 @@ const Model: ModelType = {
 
   effects: {
     *fetch(_, { call, put }) {
-      const response = yield call(fakeChartData);
+      const response = yield call(fakeChartData)
       yield put({
         type: 'save',
         payload: response,
-      });
+      })
     },
     *fetchSalesData(_, { call, put }) {
-      const response = yield call(fakeChartData);
+      const response = yield call(fakeChartData)
       yield put({
         type: 'save',
         payload: {
           salesData: response.salesData,
         },
-      });
+      })
     },
   },
 
@@ -58,12 +58,12 @@ const Model: ModelType = {
       return {
         ...state,
         ...payload,
-      };
+      }
     },
     clear() {
-      return initState;
+      return initState
     },
   },
-};
+}
 
-export default Model;
+export default Model

@@ -1,8 +1,9 @@
-import { Button, Result, Descriptions, Statistic } from 'antd';
-import React from 'react';
-import { connect, Dispatch } from 'umi';
-import { StateType } from '../../model';
-import styles from './index.less';
+import { Button, Result, Descriptions, Statistic } from 'antd'
+import React from 'react'
+import type { Dispatch } from 'umi'
+import { connect } from 'umi'
+import type { StateType } from '../../model'
+import styles from './index.less'
 
 interface Step3Props {
   data?: StateType['step'];
@@ -10,19 +11,19 @@ interface Step3Props {
 }
 
 const Step3: React.FC<Step3Props> = (props) => {
-  const { data, dispatch } = props;
+  const { data, dispatch } = props
   if (!data) {
-    return null;
+    return null
   }
-  const { payAccount, receiverAccount, receiverName, amount } = data;
+  const { payAccount, receiverAccount, receiverName, amount } = data
   const onFinish = () => {
     if (dispatch) {
       dispatch({
         type: 'formAndstepForm/saveCurrentStep',
         payload: 'info',
-      });
+      })
     }
-  };
+  }
   const information = (
     <div className={styles.information}>
       <Descriptions column={1}>
@@ -34,7 +35,7 @@ const Step3: React.FC<Step3Props> = (props) => {
         </Descriptions.Item>
       </Descriptions>
     </div>
-  );
+  )
   const extra = (
     <>
       <Button type="primary" onClick={onFinish}>
@@ -42,7 +43,7 @@ const Step3: React.FC<Step3Props> = (props) => {
       </Button>
       <Button>查看账单</Button>
     </>
-  );
+  )
   return (
     <Result
       status="success"
@@ -53,9 +54,9 @@ const Step3: React.FC<Step3Props> = (props) => {
     >
       {information}
     </Result>
-  );
-};
+  )
+}
 
 export default connect(({ formAndstepForm }: { formAndstepForm: StateType }) => ({
   data: formAndstepForm.step,
-}))(Step3);
+}))(Step3)

@@ -59,4 +59,4 @@ export default {
   'formandstep-form.option.A': 'Colleague A',
   'formandstep-form.option.B': 'Colleague B',
   'formandstep-form.option.C': 'Colleague C',
-};
+}

@@ -1,7 +1,7 @@
-import React from 'react';
-import { Spin } from 'antd';
-import isEqual from 'lodash/isEqual';
-import { isComponentClass } from './Secured';
+import React from 'react'
+import { Spin } from 'antd'
+import isEqual from 'lodash/isEqual'
+import { isComponentClass } from './Secured'
 // eslint-disable-next-line import/no-cycle
 
 type PromiseRenderProps<T, K> = {
@@ -23,37 +23,37 @@ export default class PromiseRender<T, K> extends React.Component<
   };
 
   componentDidMount(): void {
-    this.setRenderComponent(this.props);
+    this.setRenderComponent(this.props)
   }
 
   shouldComponentUpdate = (
     nextProps: PromiseRenderProps<T, K>,
     nextState: PromiseRenderState,
   ): boolean => {
-    const { component } = this.state;
+    const { component } = this.state
     if (!isEqual(nextProps, this.props)) {
-      this.setRenderComponent(nextProps);
+      this.setRenderComponent(nextProps)
     }
-    if (nextState.component !== component) return true;
-    return false;
+    if (nextState.component !== component) return true
+    return false
   };
 
   // set render Component : ok or error
   setRenderComponent(props: PromiseRenderProps<T, K>): void {
-    const ok = this.checkIsInstantiation(props.ok);
-    const error = this.checkIsInstantiation(props.error);
+    const ok = this.checkIsInstantiation(props.ok)
+    const error = this.checkIsInstantiation(props.error)
     props.promise
       .then(() => {
         this.setState({
           component: ok,
-        });
-        return true;
+        })
+        return true
       })
       .catch(() => {
         this.setState({
           component: error,
-        });
-      });
+        })
+      })
   }
 
   // Determine whether the incoming component has been instantiated
@@ -64,18 +64,18 @@ export default class PromiseRender<T, K> extends React.Component<
     target: React.ReactNode | React.ComponentClass,
   ): React.FunctionComponent => {
     if (isComponentClass(target)) {
-      const Target = target as React.ComponentClass;
-      return (props: any) => <Target {...props} />;
+      const Target = target as React.ComponentClass
+      return (props: any) => <Target {...props} />
     }
     if (React.isValidElement(target)) {
-      return (props: any) => React.cloneElement(target, props);
+      return (props: any) => React.cloneElement(target, props)
     }
-    return () => target as React.ReactNode & null;
+    return () => target as React.ReactNode & null
   };
 
   render() {
-    const { component: Component } = this.state;
-    const { ok, error, promise, ...rest } = this.props;
+    const { component: Component } = this.state
+    const { ok, error, promise, ...rest } = this.props
 
     return Component ? (
       <Component {...rest} />
@@ -91,6 +91,6 @@ export default class PromiseRender<T, K> extends React.Component<
       >
         <Spin size="large" />
       </div>
-    );
+    )
   }
 }

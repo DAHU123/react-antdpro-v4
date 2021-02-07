@@ -1,7 +1,7 @@
-import { List, Switch } from 'antd';
-import React, { Component, Fragment } from 'react';
+import { List, Switch } from 'antd'
+import React, { Component, Fragment } from 'react'
 
-import { formatMessage } from 'umi';
+import { formatMessage } from 'umi'
 
 type Unpacked<T> = T extends (infer U)[] ? U : T;
 
@@ -13,7 +13,7 @@ class NotificationView extends Component {
         unCheckedChildren={formatMessage({ id: 'accountandsettings.settings.close' })}
         defaultChecked
       />
-    );
+    )
     return [
       {
         title: formatMessage({ id: 'accountandsettings.notification.password' }, {}),
@@ -21,7 +21,7 @@ class NotificationView extends Component {
           { id: 'accountandsettings.notification.password-description' },
           {},
         ),
-        actions: [Action],
+        actions: [ Action ],
       },
       {
         title: formatMessage({ id: 'accountandsettings.notification.messages' }, {}),
@@ -29,18 +29,18 @@ class NotificationView extends Component {
           { id: 'accountandsettings.notification.messages-description' },
           {},
         ),
-        actions: [Action],
+        actions: [ Action ],
       },
       {
         title: formatMessage({ id: 'accountandsettings.notification.todo' }, {}),
         description: formatMessage({ id: 'accountandsettings.notification.todo-description' }, {}),
-        actions: [Action],
+        actions: [ Action ],
       },
-    ];
+    ]
   };
 
   render() {
-    const data = this.getData();
+    const data = this.getData()
     return (
       <Fragment>
         <List<Unpacked<typeof data>>
@@ -53,8 +53,8 @@ class NotificationView extends Component {
           )}
         />
       </Fragment>
-    );
+    )
   }
 }
 
-export default NotificationView;
+export default NotificationView

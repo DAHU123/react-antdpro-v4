@@ -1,15 +1,15 @@
-import { Card, List } from 'antd';
-import React from 'react';
+import { Card, List } from 'antd'
+import React from 'react'
 
-import { connect } from 'umi';
-import moment from 'moment';
-import AvatarList from '../AvatarList';
-import { ListItemDataType } from '../../data.d';
-import { ModalState } from '../../model';
-import styles from './index.less';
+import { connect } from 'umi'
+import moment from 'moment'
+import AvatarList from '../AvatarList'
+import type { ListItemDataType } from '../../data.d'
+import type { ModalState } from '../../model'
+import styles from './index.less'
 
 const Projects: React.FC<Partial<ModalState>> = (props) => {
-  const { list } = props;
+  const { list } = props
   return (
     <List<ListItemDataType>
       className={styles.coverCardList}
@@ -46,9 +46,9 @@ const Projects: React.FC<Partial<ModalState>> = (props) => {
         </List.Item>
       )}
     />
-  );
-};
+  )
+}
 
 export default connect(({ accountAndcenter }: { accountAndcenter: ModalState }) => ({
   list: accountAndcenter.list,
-}))(Projects);
+}))(Projects)

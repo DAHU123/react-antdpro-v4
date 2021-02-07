@@ -1,6 +1,6 @@
-import { Effect, Reducer } from 'umi';
-import { ActivitiesType, CurrentUser, NoticeType, RadarDataType } from './data.d';
-import { fakeChartData, queryActivities, queryCurrent, queryProjectNotice } from './service';
+import type { Effect, Reducer } from 'umi'
+import type { ActivitiesType, CurrentUser, NoticeType, RadarDataType } from './data.d'
+import { fakeChartData, queryActivities, queryCurrent, queryProjectNotice } from './service'
 
 export interface ModalState {
   currentUser?: CurrentUser;
@@ -35,46 +35,46 @@ const Model: ModelType = {
   },
   effects: {
     *init(_, { put }) {
-      yield put({ type: 'fetchUserCurrent' });
-      yield put({ type: 'fetchProjectNotice' });
-      yield put({ type: 'fetchActivitiesList' });
-      yield put({ type: 'fetchChart' });
+      yield put({ type: 'fetchUserCurrent' })
+      yield put({ type: 'fetchProjectNotice' })
+      yield put({ type: 'fetchActivitiesList' })
+      yield put({ type: 'fetchChart' })
     },
     *fetchUserCurrent(_, { call, put }) {
-      const response = yield call(queryCurrent);
+      const response = yield call(queryCurrent)
       yield put({
         type: 'save',
         payload: {
           currentUser: response,
         },
-      });
+      })
     },
     *fetchProjectNotice(_, { call, put }) {
-      const response = yield call(queryProjectNotice);
+      const response = yield call(queryProjectNotice)
       yield put({
         type: 'save',
         payload: {
           projectNotice: Array.isArray(response) ? response : [],
         },
-      });
+      })
     },
     *fetchActivitiesList(_, { call, put }) {
-      const response = yield call(queryActivities);
+      const response = yield call(queryActivities)
       yield put({
         type: 'save',
         payload: {
           activities: Array.isArray(response) ? response : [],
         },
-      });
+      })
     },
     *fetchChart(_, { call, put }) {
-      const { radarData } = yield call(fakeChartData);
+      const { radarData } = yield call(fakeChartData)
       yield put({
         type: 'save',
         payload: {
           radarData,
         },
-      });
+      })
     },
   },
   reducers: {
@@ -82,7 +82,7 @@ const Model: ModelType = {
       return {
         ...state,
         ...payload,
-      };
+      }
     },
     clear() {
       return {
@@ -90,9 +90,9 @@ const Model: ModelType = {
         projectNotice: [],
         activities: [],
         radarData: [],
-      };
+      }
     },
   },
-};
+}
 
-export default Model;
+export default Model

@@ -1,5 +1,5 @@
-import React from 'react';
-import { yuan } from '../components/Charts';
+import React from 'react'
+import { yuan } from '../components/Charts'
 /**
  * 减少使用 dangerouslySetInnerHTML
  */
@@ -9,17 +9,17 @@ export default class Yuan extends React.Component<{
   main: HTMLSpanElement | undefined | null = null;
 
   componentDidMount() {
-    this.renderToHtml();
+    this.renderToHtml()
   }
 
   componentDidUpdate() {
-    this.renderToHtml();
+    this.renderToHtml()
   }
 
   renderToHtml = () => {
-    const { children } = this.props;
+    const { children } = this.props
     if (this.main) {
-      this.main.innerHTML = yuan(children);
+      this.main.innerHTML = yuan(children)
     }
   };
 
@@ -27,9 +27,9 @@ export default class Yuan extends React.Component<{
     return (
       <span
         ref={(ref) => {
-          this.main = ref;
+          this.main = ref
         }}
       />
-    );
+    )
   }
 }

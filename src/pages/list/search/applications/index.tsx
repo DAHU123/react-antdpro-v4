@@ -3,24 +3,26 @@ import {
   EditOutlined,
   EllipsisOutlined,
   ShareAltOutlined,
-} from '@ant-design/icons';
-import { Avatar, Card, Col, Dropdown, List, Menu, Row, Select, Tooltip, Form } from 'antd';
-import React, { FC, useEffect } from 'react';
-import { connect, Dispatch } from 'umi';
-import numeral from 'numeral';
-import { ListItemDataType } from './data.d';
-import StandardFormRow from './components/StandardFormRow';
-import TagSelect from './components/TagSelect';
-import styles from './style.less';
-import { StateType } from './model';
+} from '@ant-design/icons'
+import { Avatar, Card, Col, Dropdown, List, Menu, Row, Select, Tooltip, Form } from 'antd'
+import type { FC } from 'react'
+import React, { useEffect } from 'react'
+import type { Dispatch } from 'umi'
+import { connect } from 'umi'
+import numeral from 'numeral'
+import type { ListItemDataType } from './data.d'
+import StandardFormRow from './components/StandardFormRow'
+import TagSelect from './components/TagSelect'
+import styles from './style.less'
+import type { StateType } from './model'
 
-const { Option } = Select;
+const { Option } = Select
 
 export function formatWan(val: number) {
-  const v = val * 1;
-  if (!v || Number.isNaN(v)) return '';
+  const v = val * 1
+  if (!v || Number.isNaN(v)) return ''
 
-  let result: React.ReactNode = val;
+  let result: React.ReactNode = val
   if (val > 10000) {
     result = (
       <span>
@@ -37,9 +39,9 @@ export function formatWan(val: number) {
           万
         </span>
       </span>
-    );
+    )
   }
-  return result;
+  return result
 }
 
 interface ApplicationsProps {
@@ -53,7 +55,7 @@ const formItemLayout = {
     xs: { span: 24 },
     sm: { span: 16 },
   },
-};
+}
 
 const CardInfo: React.FC<{
   activeUser: React.ReactNode;
@@ -69,14 +71,14 @@ const CardInfo: React.FC<{
       <p>{newUser}</p>
     </div>
   </div>
-);
+)
 
 export const Applications: FC<ApplicationsProps> = (props) => {
   const {
     dispatch,
     loading,
     listAndsearchAndapplications: { list },
-  } = props;
+  } = props
 
   useEffect(() => {
     dispatch({
@@ -84,8 +86,8 @@ export const Applications: FC<ApplicationsProps> = (props) => {
       payload: {
         count: 8,
       },
-    });
-  }, [1]);
+    })
+  }, [ 1 ])
 
   const handleValuesChange = () => {
     dispatch({
@@ -93,8 +95,8 @@ export const Applications: FC<ApplicationsProps> = (props) => {
       payload: {
         count: 8,
       },
-    });
-  };
+    })
+  }
 
   const itemMenu = (
     <Menu>
@@ -114,7 +116,7 @@ export const Applications: FC<ApplicationsProps> = (props) => {
         </a>
       </Menu.Item>
     </Menu>
-  );
+  )
 
   return (
     <div className={styles.filterCardList}>
@@ -205,8 +207,8 @@ export const Applications: FC<ApplicationsProps> = (props) => {
         )}
       />
     </div>
-  );
-};
+  )
+}
 
 export default connect(
   ({
@@ -214,9 +216,9 @@ export default connect(
     loading,
   }: {
     listAndsearchAndapplications: StateType;
-    loading: { models: { [key: string]: boolean } };
+    loading: { models: Record<string, boolean> };
   }) => ({
     listAndsearchAndapplications,
     loading: loading.models.listAndsearchAndapplications,
   }),
-)(Applications);
+)(Applications)

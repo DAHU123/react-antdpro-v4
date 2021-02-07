@@ -1,14 +1,15 @@
-import { Avatar, Card, Col, List, Skeleton, Row, Statistic } from 'antd';
-import React, { Component } from 'react';
+import { Avatar, Card, Col, List, Skeleton, Row, Statistic } from 'antd'
+import React, { Component } from 'react'
 
-import { Link, Dispatch, connect } from 'umi';
-import { PageContainer } from '@ant-design/pro-layout';
-import moment from 'moment';
-import Radar from './components/Radar';
-import { ModalState } from './model';
-import EditableLinkGroup from './components/EditableLinkGroup';
-import styles from './style.less';
-import { ActivitiesType, CurrentUser, NoticeType, RadarDataType } from './data.d';
+import type { Dispatch } from 'umi'
+import { Link, connect } from 'umi'
+import { PageContainer } from '@ant-design/pro-layout'
+import moment from 'moment'
+import Radar from './components/Radar'
+import type { ModalState } from './model'
+import EditableLinkGroup from './components/EditableLinkGroup'
+import styles from './style.less'
+import type { ActivitiesType, CurrentUser, NoticeType, RadarDataType } from './data.d'
 
 const links = [
   {
@@ -35,7 +36,7 @@ const links = [
     title: '操作六',
     href: '',
   },
-];
+]
 
 interface WorkplaceProps {
   currentUser?: CurrentUser;
@@ -49,9 +50,9 @@ interface WorkplaceProps {
 }
 
 const PageHeaderContent: React.FC<{ currentUser: CurrentUser }> = ({ currentUser }) => {
-  const loading = currentUser && Object.keys(currentUser).length;
+  const loading = currentUser && Object.keys(currentUser).length
   if (!loading) {
-    return <Skeleton avatar paragraph={{ rows: 1 }} active />;
+    return <Skeleton avatar paragraph={{ rows: 1 }} active />
   }
   return (
     <div className={styles.pageHeaderContent}>
@@ -69,8 +70,8 @@ const PageHeaderContent: React.FC<{ currentUser: CurrentUser }> = ({ currentUser
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
 const ExtraContent: React.FC<{}> = () => (
   <div className={styles.extraContent}>
@@ -84,21 +85,21 @@ const ExtraContent: React.FC<{}> = () => (
       <Statistic title="项目访问" value={2223} />
     </div>
   </div>
-);
+)
 
 class Workplace extends Component<WorkplaceProps> {
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { dispatch } = this.props
     dispatch({
       type: 'dashboardAndworkplace/init',
-    });
+    })
   }
 
   componentWillUnmount() {
-    const { dispatch } = this.props;
+    const { dispatch } = this.props
     dispatch({
       type: 'dashboardAndworkplace/clear',
-    });
+    })
   }
 
   renderActivities = (item: ActivitiesType) => {
@@ -108,10 +109,10 @@ class Workplace extends Component<WorkplaceProps> {
           <a href={item[key].link} key={item[key].name}>
             {item[key].name}
           </a>
-        );
+        )
       }
-      return key;
-    });
+      return key
+    })
     return (
       <List.Item key={item.id}>
         <List.Item.Meta
@@ -130,7 +131,7 @@ class Workplace extends Component<WorkplaceProps> {
           }
         />
       </List.Item>
-    );
+    )
   };
 
   render() {
@@ -141,10 +142,10 @@ class Workplace extends Component<WorkplaceProps> {
       projectLoading,
       activitiesLoading,
       radarData,
-    } = this.props;
+    } = this.props
 
     if (!currentUser || !currentUser.userid) {
-      return null;
+      return null
     }
     return (
       <PageContainer
@@ -243,7 +244,7 @@ class Workplace extends Component<WorkplaceProps> {
           </Col>
         </Row>
       </PageContainer>
-    );
+    )
   }
 }
 
@@ -254,9 +255,7 @@ export default connect(
   }: {
     dashboardAndworkplace: ModalState;
     loading: {
-      effects: {
-        [key: string]: boolean;
-      };
+      effects: Record<string, boolean>;
     };
   }) => ({
     currentUser,
@@ -267,4 +266,4 @@ export default connect(
     projectLoading: loading.effects['dashboardAndworkplace/fetchProjectNotice'],
     activitiesLoading: loading.effects['dashboardAndworkplace/fetchActivitiesList'],
   }),
-)(Workplace);
+)(Workplace)

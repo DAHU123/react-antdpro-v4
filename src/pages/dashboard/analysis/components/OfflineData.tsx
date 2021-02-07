@@ -1,11 +1,11 @@
-import { Card, Col, Row, Tabs } from 'antd';
-import { FormattedMessage, formatMessage } from 'umi';
-import React from 'react';
-import { OfflineChartData, OfflineDataType } from '../data.d';
+import { Card, Col, Row, Tabs } from 'antd'
+import { FormattedMessage, formatMessage } from 'umi'
+import React from 'react'
+import type { OfflineChartData, OfflineDataType } from '../data.d'
 
-import { TimelineChart, Pie } from './Charts';
-import NumberInfo from './NumberInfo';
-import styles from '../style.less';
+import { TimelineChart, Pie } from './Charts'
+import NumberInfo from './NumberInfo'
+import styles from '../style.less'
 
 const CustomTab = ({
   data,
@@ -34,15 +34,15 @@ const CustomTab = ({
         animate={false}
         inner={0.55}
         tooltip={false}
-        margin={[0, 0, 0, 0]}
+        margin={[ 0, 0, 0, 0 ]}
         percent={data.cvr * 100}
         height={64}
       />
     </Col>
   </Row>
-);
+)
 
-const { TabPane } = Tabs;
+const { TabPane } = Tabs
 
 const OfflineData = ({
   activeKey,
@@ -75,6 +75,6 @@ const OfflineData = ({
       ))}
     </Tabs>
   </Card>
-);
+)
 
-export default OfflineData;
+export default OfflineData

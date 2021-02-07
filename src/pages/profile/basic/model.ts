@@ -1,7 +1,7 @@
-import { Effect, Reducer } from 'umi';
+import type { Effect, Reducer } from 'umi'
 
-import { BasicGood } from './data.d';
-import { queryBasicProfile } from './service';
+import type { BasicGood } from './data.d'
+import { queryBasicProfile } from './service'
 
 export interface StateType {
   basicGoods: BasicGood[];
@@ -27,11 +27,11 @@ const Model: ModelType = {
 
   effects: {
     *fetchBasic(_, { call, put }) {
-      const response = yield call(queryBasicProfile);
+      const response = yield call(queryBasicProfile)
       yield put({
         type: 'show',
         payload: response,
-      });
+      })
     },
   },
 
@@ -40,9 +40,9 @@ const Model: ModelType = {
       return {
         ...state,
         ...payload,
-      };
+      }
     },
   },
-};
+}
 
-export default Model;
+export default Model

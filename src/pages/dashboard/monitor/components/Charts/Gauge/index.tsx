@@ -1,9 +1,9 @@
-import { Axis, Chart, Coord, Geom, Guide, Shape } from 'bizcharts';
+import { Axis, Chart, Coord, Geom, Guide, Shape } from 'bizcharts'
 
-import React from 'react';
-import autoHeight from '../autoHeight';
+import React from 'react'
+import autoHeight from '../autoHeight'
 
-const { Arc, Html, Line } = Guide;
+const { Arc, Html, Line } = Guide
 
 export interface GaugeProps {
   title: React.ReactNode;
@@ -19,27 +19,27 @@ export interface GaugeProps {
 const defaultFormatter = (val: string): string => {
   switch (val) {
     case '2':
-      return '差';
+      return '差'
     case '4':
-      return '中';
+      return '中'
     case '6':
-      return '良';
+      return '良'
     case '8':
-      return '优';
+      return '优'
     default:
-      return '';
+      return ''
   }
-};
+}
 
 if (Shape.registerShape) {
   Shape.registerShape('point', 'pointer', {
     drawShape(cfg: any, group: any) {
-      let point = cfg.points[0];
-      point = (this as any).parsePoint(point);
+      let point = cfg.points[0]
+      point = (this as any).parsePoint(point)
       const center = (this as any).parsePoint({
         x: 0,
         y: 0,
-      });
+      })
       group.addShape('line', {
         attrs: {
           x1: center.x,
@@ -50,7 +50,7 @@ if (Shape.registerShape) {
           lineWidth: 2,
           lineCap: 'round',
         },
-      });
+      })
       return group.addShape('circle', {
         attrs: {
           x: center.x,
@@ -60,9 +60,9 @@ if (Shape.registerShape) {
           lineWidth: 3,
           fill: '#fff',
         },
-      });
+      })
     },
-  });
+  })
 }
 
 const Gauge: React.FC<GaugeProps> = (props) => {
@@ -74,7 +74,7 @@ const Gauge: React.FC<GaugeProps> = (props) => {
     formatter = defaultFormatter,
     color = '#2F9CFF',
     bgColor = '#F0F2F5',
-  } = props;
+  } = props
   const cols = {
     value: {
       type: 'linear',
@@ -83,8 +83,8 @@ const Gauge: React.FC<GaugeProps> = (props) => {
       tickCount: 6,
       nice: true,
     },
-  };
-  const data = [{ value: percent / 10 }];
+  }
+  const data = [ { value: percent / 10 } ]
 
   const renderHtml = () => `
   <div style="width: 300px;text-align: center;font-size: 12px!important;">
@@ -92,7 +92,7 @@ const Gauge: React.FC<GaugeProps> = (props) => {
     <div style="font-size: 24px;color: rgba(0,0,0,0.85);margin: 0;">
       ${(data[0].value * 10).toFixed(2)}%
     </div>
-  </div>`;
+  </div>`
 
   const textStyle: {
     fontSize: number;
@@ -102,9 +102,9 @@ const Gauge: React.FC<GaugeProps> = (props) => {
     fontSize: 12,
     fill: 'rgba(0, 0, 0, 0.65)',
     textAlign: 'center',
-  };
+  }
   return (
-    <Chart height={height} data={data} scale={cols} padding={[-16, 0, 16, 0]} forceFit={forceFit}>
+    <Chart height={height} data={data} scale={cols} padding={[ -16, 0, 16, 0 ]} forceFit={forceFit}>
       <Coord type="polar" startAngle={-1.25 * Math.PI} endAngle={0.25 * Math.PI} radius={0.8} />
       <Axis name="1" line={undefined} />
       <Axis
@@ -121,8 +121,8 @@ const Gauge: React.FC<GaugeProps> = (props) => {
       />
       <Guide>
         <Line
-          start={[3, 0.905]}
-          end={[3, 0.85]}
+          start={[ 3, 0.905 ]}
+          end={[ 3, 0.85 ]}
           lineStyle={{
             stroke: color,
             lineDash: undefined,
@@ -130,8 +130,8 @@ const Gauge: React.FC<GaugeProps> = (props) => {
           }}
         />
         <Line
-          start={[5, 0.905]}
-          end={[5, 0.85]}
+          start={[ 5, 0.905 ]}
+          end={[ 5, 0.85 ]}
           lineStyle={{
             stroke: color,
             lineDash: undefined,
@@ -139,8 +139,8 @@ const Gauge: React.FC<GaugeProps> = (props) => {
           }}
         />
         <Line
-          start={[7, 0.905]}
-          end={[7, 0.85]}
+          start={[ 7, 0.905 ]}
+          end={[ 7, 0.85 ]}
           lineStyle={{
             stroke: color,
             lineDash: undefined,
@@ -148,22 +148,22 @@ const Gauge: React.FC<GaugeProps> = (props) => {
           }}
         />
         <Arc
-          start={[0, 0.965]}
-          end={[10, 0.965]}
+          start={[ 0, 0.965 ]}
+          end={[ 10, 0.965 ]}
           style={{
             stroke: bgColor,
             lineWidth: 10,
           }}
         />
         <Arc
-          start={[0, 0.965]}
-          end={[data[0].value, 0.965]}
+          start={[ 0, 0.965 ]}
+          end={[ data[0].value, 0.965 ]}
           style={{
             stroke: color,
             lineWidth: 10,
           }}
         />
-        <Html position={['50%', '95%']} html={renderHtml()} />
+        <Html position={[ '50%', '95%' ]} html={renderHtml()} />
       </Guide>
       <Geom
         line={false}
@@ -174,7 +174,7 @@ const Gauge: React.FC<GaugeProps> = (props) => {
         active={false}
       />
     </Chart>
-  );
-};
+  )
+}
 
-export default autoHeight()(Gauge);
+export default autoHeight()(Gauge)

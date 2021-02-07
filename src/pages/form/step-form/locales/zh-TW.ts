@@ -56,4 +56,4 @@ export default {
   'formandstep-form.option.A': '同事甲',
   'formandstep-form.option.B': '同事乙',
   'formandstep-form.option.C': '同事丙',
-};
+}

@@ -1,18 +1,20 @@
-import React, { FC, useEffect } from 'react';
-import { Button, Card, Col, Form, List, Row, Select, Tag } from 'antd';
-import { LoadingOutlined, StarOutlined, LikeOutlined, MessageOutlined } from '@ant-design/icons';
-import { connect, Dispatch } from 'umi';
-import ArticleListContent from './components/ArticleListContent';
-import { StateType } from './model';
-import { ListItemDataType } from './data.d';
-import StandardFormRow from './components/StandardFormRow';
-import TagSelect from './components/TagSelect';
-import styles from './style.less';
+import type { FC } from 'react'
+import React, { useEffect } from 'react'
+import { Button, Card, Col, Form, List, Row, Select, Tag } from 'antd'
+import { LoadingOutlined, StarOutlined, LikeOutlined, MessageOutlined } from '@ant-design/icons'
+import type { Dispatch } from 'umi'
+import { connect } from 'umi'
+import ArticleListContent from './components/ArticleListContent'
+import type { StateType } from './model'
+import type { ListItemDataType } from './data.d'
+import StandardFormRow from './components/StandardFormRow'
+import TagSelect from './components/TagSelect'
+import styles from './style.less'
 
-const { Option } = Select;
-const FormItem = Form.Item;
+const { Option } = Select
+const FormItem = Form.Item
 
-const pageSize = 5;
+const pageSize = 5
 
 interface ArticlesProps {
   dispatch: Dispatch<any>;
@@ -20,20 +22,20 @@ interface ArticlesProps {
   loading: boolean;
 }
 const Articles: FC<ArticlesProps> = ({ dispatch, listAndsearchAndarticles: { list }, loading }) => {
-  const [form] = Form.useForm();
+  const [ form ] = Form.useForm()
   useEffect(() => {
     dispatch({
       type: 'listAndsearchAndarticles/fetch',
       payload: {
         count: 5,
       },
-    });
-  }, []);
+    })
+  }, [])
   const setOwner = () => {
     form.setFieldsValue({
-      owner: ['wzj'],
-    });
-  };
+      owner: [ 'wzj' ],
+    })
+  }
 
   const fetchMore = () => {
     dispatch({
@@ -41,8 +43,8 @@ const Articles: FC<ArticlesProps> = ({ dispatch, listAndsearchAndarticles: { lis
       payload: {
         count: pageSize,
       },
-    });
-  };
+    })
+  }
 
   const owners = [
     {
@@ -65,7 +67,7 @@ const Articles: FC<ArticlesProps> = ({ dispatch, listAndsearchAndarticles: { lis
       id: 'ym',
       name: '姚明',
     },
-  ];
+  ]
 
   const IconText: React.FC<{
     type: string;
@@ -78,25 +80,25 @@ const Articles: FC<ArticlesProps> = ({ dispatch, listAndsearchAndarticles: { lis
             <StarOutlined style={{ marginRight: 8 }} />
             {text}
           </span>
-        );
+        )
       case 'like-o':
         return (
           <span>
             <LikeOutlined style={{ marginRight: 8 }} />
             {text}
           </span>
-        );
+        )
       case 'message':
         return (
           <span>
             <MessageOutlined style={{ marginRight: 8 }} />
             {text}
           </span>
-        );
+        )
       default:
-        return null;
+        return null
     }
-  };
+  }
 
   const formItemLayout = {
     wrapperCol: {
@@ -104,7 +106,7 @@ const Articles: FC<ArticlesProps> = ({ dispatch, listAndsearchAndarticles: { lis
       sm: { span: 24 },
       md: { span: 12 },
     },
-  };
+  }
 
   const loadMore = list.length > 0 && (
     <div style={{ textAlign: 'center', marginTop: 16 }}>
@@ -118,7 +120,7 @@ const Articles: FC<ArticlesProps> = ({ dispatch, listAndsearchAndarticles: { lis
         )}
       </Button>
     </div>
-  );
+  )
 
   return (
     <>
@@ -127,7 +129,7 @@ const Articles: FC<ArticlesProps> = ({ dispatch, listAndsearchAndarticles: { lis
           layout="inline"
           form={form}
           initialValues={{
-            owner: ['wjh', 'zxx'],
+            owner: [ 'wjh', 'zxx' ],
           }}
           onValuesChange={() => {
             dispatch({
@@ -135,7 +137,7 @@ const Articles: FC<ArticlesProps> = ({ dispatch, listAndsearchAndarticles: { lis
               payload: {
                 count: 8,
               },
-            });
+            })
           }}
         >
           <StandardFormRow title="所属类目" block style={{ paddingBottom: 11 }}>
@@ -232,8 +234,8 @@ const Articles: FC<ArticlesProps> = ({ dispatch, listAndsearchAndarticles: { lis
         />
       </Card>
     </>
-  );
-};
+  )
+}
 
 export default connect(
   ({
@@ -241,9 +243,9 @@ export default connect(
     loading,
   }: {
     listAndsearchAndarticles: StateType;
-    loading: { models: { [key: string]: boolean } };
+    loading: { models: Record<string, boolean> };
   }) => ({
     listAndsearchAndarticles,
     loading: loading.models.listAndsearchAndarticles,
   }),
-)(Articles);
+)(Articles)

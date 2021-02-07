@@ -3,20 +3,20 @@ import {
   EditOutlined,
   EllipsisOutlined,
   ShareAltOutlined,
-} from '@ant-design/icons';
-import { Avatar, Card, Dropdown, List, Menu, Tooltip } from 'antd';
-import React from 'react';
+} from '@ant-design/icons'
+import { Avatar, Card, Dropdown, List, Menu, Tooltip } from 'antd'
+import React from 'react'
 
-import { connect } from 'umi';
-import numeral from 'numeral';
-import { ModalState } from '../../model';
-import stylesApplications from './index.less';
+import { connect } from 'umi'
+import numeral from 'numeral'
+import type { ModalState } from '../../model'
+import stylesApplications from './index.less'
 
 export function formatWan(val: number) {
-  const v = val * 1;
-  if (!v || Number.isNaN(v)) return '';
+  const v = val * 1
+  if (!v || Number.isNaN(v)) return ''
 
-  let result: React.ReactNode = val;
+  let result: React.ReactNode = val
   if (val > 10000) {
     result = (
       <span>
@@ -33,13 +33,13 @@ export function formatWan(val: number) {
           万
         </span>
       </span>
-    );
+    )
   }
-  return result;
+  return result
 }
 
 const Applications: React.FC<Partial<ModalState>> = (props) => {
-  const { list } = props;
+  const { list } = props
   const itemMenu = (
     <Menu>
       <Menu.Item>
@@ -58,7 +58,7 @@ const Applications: React.FC<Partial<ModalState>> = (props) => {
         </a>
       </Menu.Item>
     </Menu>
-  );
+  )
   const CardInfo: React.FC<{
     activeUser: React.ReactNode;
     newUser: React.ReactNode;
@@ -73,7 +73,7 @@ const Applications: React.FC<Partial<ModalState>> = (props) => {
         <p>{newUser}</p>
       </div>
     </div>
-  );
+  )
   return (
     <List
       rowKey="id"
@@ -119,9 +119,9 @@ const Applications: React.FC<Partial<ModalState>> = (props) => {
         </List.Item>
       )}
     />
-  );
-};
+  )
+}
 
 export default connect(({ accountAndcenter }: { accountAndcenter: ModalState }) => ({
   list: accountAndcenter.list,
-}))(Applications);
+}))(Applications)

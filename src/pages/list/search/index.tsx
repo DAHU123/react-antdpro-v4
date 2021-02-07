@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import { Input } from 'antd';
-import { PageContainer } from '@ant-design/pro-layout';
-import { history } from 'umi';
+import { Input } from 'antd'
+import { PageContainer } from '@ant-design/pro-layout'
+import { history } from 'umi'
 
 interface SearchProps {
   match: {
@@ -16,36 +16,36 @@ interface SearchProps {
 
 class Search extends Component<SearchProps> {
   handleTabChange = (key: string) => {
-    const { match } = this.props;
-    const url = match.url === '/' ? '' : match.url;
+    const { match } = this.props
+    const url = match.url === '/' ? '' : match.url
     switch (key) {
       case 'articles':
-        history.push(`${url}/articles`);
-        break;
+        history.push(`${url}/articles`)
+        break
       case 'applications':
-        history.push(`${url}/applications`);
-        break;
+        history.push(`${url}/applications`)
+        break
       case 'projects':
-        history.push(`${url}/projects`);
-        break;
+        history.push(`${url}/projects`)
+        break
       default:
-        break;
+        break
     }
   };
 
   handleFormSubmit = (value: string) => {
     // eslint-disable-next-line no-console
-    console.log(value);
+    console.log(value)
   };
 
   getTabKey = () => {
-    const { match, location } = this.props;
-    const url = match.path === '/' ? '' : match.path;
-    const tabKey = location.pathname.replace(`${url}/`, '');
+    const { match, location } = this.props
+    const url = match.path === '/' ? '' : match.path
+    const tabKey = location.pathname.replace(`${url}/`, '')
     if (tabKey && tabKey !== '/') {
-      return tabKey;
+      return tabKey
     }
-    return 'articles';
+    return 'articles'
   };
 
   render() {
@@ -62,7 +62,7 @@ class Search extends Component<SearchProps> {
         key: 'applications',
         tab: '应用',
       },
-    ];
+    ]
 
     const mainSearch = (
       <div style={{ textAlign: 'center' }}>
@@ -74,9 +74,9 @@ class Search extends Component<SearchProps> {
           style={{ maxWidth: 522, width: '100%' }}
         />
       </div>
-    );
+    )
 
-    const { children } = this.props;
+    const { children } = this.props
 
     return (
       <PageContainer
@@ -87,8 +87,8 @@ class Search extends Component<SearchProps> {
       >
         {children}
       </PageContainer>
-    );
+    )
   }
 }
 
-export default Search;
+export default Search

@@ -1,17 +1,19 @@
-import { Card, Col, Form, List, Row, Select, Typography } from 'antd';
-import React, { FC, useEffect } from 'react';
-import { connect, Dispatch } from 'umi';
-import moment from 'moment';
-import AvatarList from './components/AvatarList';
-import { StateType } from './model';
-import { ListItemDataType } from './data.d';
-import StandardFormRow from './components/StandardFormRow';
-import TagSelect from './components/TagSelect';
-import styles from './style.less';
+import { Card, Col, Form, List, Row, Select, Typography } from 'antd'
+import type { FC } from 'react'
+import React, { useEffect } from 'react'
+import type { Dispatch } from 'umi'
+import { connect } from 'umi'
+import moment from 'moment'
+import AvatarList from './components/AvatarList'
+import type { StateType } from './model'
+import type { ListItemDataType } from './data.d'
+import StandardFormRow from './components/StandardFormRow'
+import TagSelect from './components/TagSelect'
+import styles from './style.less'
 
-const { Option } = Select;
-const FormItem = Form.Item;
-const { Paragraph } = Typography;
+const { Option } = Select
+const FormItem = Form.Item
+const { Paragraph } = Typography
 
 interface ProjectsProps {
   dispatch: Dispatch<any>;
@@ -19,7 +21,7 @@ interface ProjectsProps {
   loading: boolean;
 }
 
-const getKey = (id: string, index: number) => `${id}-${index}`;
+const getKey = (id: string, index: number) => `${id}-${index}`
 
 const Projects: FC<ProjectsProps> = ({
   dispatch,
@@ -32,8 +34,8 @@ const Projects: FC<ProjectsProps> = ({
       payload: {
         count: 8,
       },
-    });
-  }, []);
+    })
+  }, [])
   const cardList = list && (
     <List<ListItemDataType>
       rowKey="id"
@@ -77,14 +79,14 @@ const Projects: FC<ProjectsProps> = ({
         </List.Item>
       )}
     />
-  );
+  )
 
   const formItemLayout = {
     wrapperCol: {
       xs: { span: 24 },
       sm: { span: 16 },
     },
-  };
+  }
 
   return (
     <div className={styles.coverCardList}>
@@ -99,7 +101,7 @@ const Projects: FC<ProjectsProps> = ({
               payload: {
                 count: 8,
               },
-            });
+            })
           }}
         >
           <StandardFormRow title="所属类目" block style={{ paddingBottom: 11 }}>
@@ -143,8 +145,8 @@ const Projects: FC<ProjectsProps> = ({
       </Card>
       <div className={styles.cardList}>{cardList}</div>
     </div>
-  );
-};
+  )
+}
 
 export default connect(
   ({
@@ -152,9 +154,9 @@ export default connect(
     loading,
   }: {
     listAndsearchAndprojects: StateType;
-    loading: { models: { [key: string]: boolean } };
+    loading: { models: Record<string, boolean> };
   }) => ({
     listAndsearchAndprojects,
     loading: loading.models.listAndsearchAndprojects,
   }),
-)(Projects);
+)(Projects)

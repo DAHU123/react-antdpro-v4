@@ -1,5 +1,5 @@
-import React from 'react';
-import { Modal } from 'antd';
+import React from 'react'
+import { Modal } from 'antd'
 import {
   ProFormSelect,
   ProFormText,
@@ -7,10 +7,10 @@ import {
   StepsForm,
   ProFormRadio,
   ProFormDateTimePicker,
-} from '@ant-design/pro-form';
-import { useIntl, FormattedMessage } from 'umi';
+} from '@ant-design/pro-form'
+import { useIntl, FormattedMessage } from 'umi'
 
-import type { TableListItem } from '../data.d';
+import type { TableListItem } from '../data.d'
 
 export type FormValueType = {
   target?: string;
@@ -28,7 +28,7 @@ export type UpdateFormProps = {
 };
 
 const UpdateForm: React.FC<UpdateFormProps> = (props) => {
-  const intl = useIntl();
+  const intl = useIntl()
   return (
     <StepsForm
       stepsProps={{
@@ -47,12 +47,12 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
             visible={props.updateModalVisible}
             footer={submitter}
             onCancel={() => {
-              props.onCancel();
+              props.onCancel()
             }}
           >
             {dom}
           </Modal>
-        );
+        )
       }}
       onFinish={props.onSubmit}
     >
@@ -205,7 +205,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
         />
       </StepsForm.StepForm>
     </StepsForm>
-  );
-};
+  )
+}
 
-export default UpdateForm;
+export default UpdateForm

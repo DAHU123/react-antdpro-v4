@@ -1,7 +1,7 @@
-import { Effect, Reducer } from 'umi';
+import type { Effect, Reducer } from 'umi'
 
-import { TagType } from './data.d';
-import { queryTags } from './service';
+import type { TagType } from './data.d'
+import { queryTags } from './service'
 
 export interface StateType {
   tags: TagType[];
@@ -27,11 +27,11 @@ const Model: ModelType = {
 
   effects: {
     *fetchTags(_, { call, put }) {
-      const response = yield call(queryTags);
+      const response = yield call(queryTags)
       yield put({
         type: 'saveTags',
         payload: response.list,
-      });
+      })
     },
   },
 
@@ -40,9 +40,9 @@ const Model: ModelType = {
       return {
         ...state,
         tags: action.payload,
-      };
+      }
     },
   },
-};
+}
 
-export default Model;
+export default Model

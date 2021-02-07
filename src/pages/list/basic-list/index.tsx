@@ -1,5 +1,6 @@
-import React, { FC, useRef, useState, useEffect } from 'react';
-import { DownOutlined, PlusOutlined } from '@ant-design/icons';
+import type { FC } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
+import { DownOutlined, PlusOutlined } from '@ant-design/icons'
 import {
   Avatar,
   Button,
@@ -13,20 +14,21 @@ import {
   Progress,
   Radio,
   Row,
-} from 'antd';
+} from 'antd'
 
-import { findDOMNode } from 'react-dom';
-import { PageContainer } from '@ant-design/pro-layout';
-import { connect, Dispatch } from 'umi';
-import moment from 'moment';
-import OperationModal from './components/OperationModal';
-import { StateType } from './model';
-import { BasicListItemDataType } from './data.d';
-import styles from './style.less';
+import { findDOMNode } from 'react-dom'
+import { PageContainer } from '@ant-design/pro-layout'
+import type { Dispatch } from 'umi'
+import { connect } from 'umi'
+import moment from 'moment'
+import OperationModal from './components/OperationModal'
+import type { StateType } from './model'
+import type { BasicListItemDataType } from './data.d'
+import styles from './style.less'
 
-const RadioButton = Radio.Button;
-const RadioGroup = Radio.Group;
-const { Search } = Input;
+const RadioButton = Radio.Button
+const RadioGroup = Radio.Group
+const { Search } = Input
 
 interface BasicListProps {
   listAndbasicList: StateType;
@@ -44,7 +46,7 @@ const Info: FC<{
     <p>{value}</p>
     {bordered && <em />}
   </div>
-);
+)
 
 const ListContent = ({
   data: { owner, createdAt, percent, status },
@@ -64,18 +66,18 @@ const ListContent = ({
       <Progress percent={percent} status={status} strokeWidth={6} style={{ width: 180 }} />
     </div>
   </div>
-);
+)
 
 export const BasicList: FC<BasicListProps> = (props) => {
-  const addBtn = useRef(null);
+  const addBtn = useRef(null)
   const {
     loading,
     dispatch,
     listAndbasicList: { list },
-  } = props;
-  const [done, setDone] = useState<boolean>(false);
-  const [visible, setVisible] = useState<boolean>(false);
-  const [current, setCurrent] = useState<Partial<BasicListItemDataType> | undefined>(undefined);
+  } = props
+  const [ done, setDone ] = useState<boolean>(false)
+  const [ visible, setVisible ] = useState<boolean>(false)
+  const [ current, setCurrent ] = useState<Partial<BasicListItemDataType> | undefined>(undefined)
 
   useEffect(() => {
     dispatch({
@@ -83,35 +85,35 @@ export const BasicList: FC<BasicListProps> = (props) => {
       payload: {
         count: 5,
       },
-    });
-  }, [1]);
+    })
+  }, [ 1 ])
 
   const paginationProps = {
     showSizeChanger: true,
     showQuickJumper: true,
     pageSize: 5,
     total: 50,
-  };
+  }
 
   const showModal = () => {
-    setVisible(true);
-    setCurrent(undefined);
-  };
+    setVisible(true)
+    setCurrent(undefined)
+  }
 
   const showEditModal = (item: BasicListItemDataType) => {
-    setVisible(true);
-    setCurrent(item);
-  };
+    setVisible(true)
+    setCurrent(item)
+  }
 
   const deleteItem = (id: string) => {
     dispatch({
       type: 'listAndbasicList/submit',
       payload: { id },
-    });
-  };
+    })
+  }
 
   const editAndDelete = (key: string, currentItem: BasicListItemDataType) => {
-    if (key === 'edit') showEditModal(currentItem);
+    if (key === 'edit') showEditModal(currentItem)
     else if (key === 'delete') {
       Modal.confirm({
         title: '删除任务',
@@ -119,9 +121,9 @@ export const BasicList: FC<BasicListProps> = (props) => {
         okText: '确认',
         cancelText: '取消',
         onOk: () => deleteItem(currentItem.id),
-      });
+      })
     }
-  };
+  }
 
   const extraContent = (
     <div className={styles.extraContent}>
@@ -132,7 +134,7 @@ export const BasicList: FC<BasicListProps> = (props) => {
       </RadioGroup>
       <Search className={styles.extraContentSearch} placeholder="请输入" onSearch={() => ({})} />
     </div>
-  );
+  )
 
   const MoreBtn: React.FC<{
     item: BasicListItemDataType;
@@ -149,39 +151,39 @@ export const BasicList: FC<BasicListProps> = (props) => {
         更多 <DownOutlined />
       </a>
     </Dropdown>
-  );
+  )
 
   const setAddBtnblur = () => {
     if (addBtn.current) {
       // eslint-disable-next-line react/no-find-dom-node
-      const addBtnDom = findDOMNode(addBtn.current) as HTMLButtonElement;
-      setTimeout(() => addBtnDom.blur(), 0);
+      const addBtnDom = findDOMNode(addBtn.current) as HTMLButtonElement
+      setTimeout(() => addBtnDom.blur(), 0)
     }
-  };
+  }
 
   const handleDone = () => {
-    setAddBtnblur();
+    setAddBtnblur()
 
-    setDone(false);
-    setVisible(false);
-  };
+    setDone(false)
+    setVisible(false)
+  }
 
   const handleCancel = () => {
-    setAddBtnblur();
-    setVisible(false);
-  };
+    setAddBtnblur()
+    setVisible(false)
+  }
 
   const handleSubmit = (values: BasicListItemDataType) => {
-    const id = current ? current.id : '';
+    const id = current ? current.id : ''
 
-    setAddBtnblur();
+    setAddBtnblur()
 
-    setDone(true);
+    setDone(true)
     dispatch({
       type: 'listAndbasicList/submit',
       payload: { id, ...values },
-    });
-  };
+    })
+  }
 
   return (
     <div>
@@ -231,8 +233,8 @@ export const BasicList: FC<BasicListProps> = (props) => {
                     <a
                       key="edit"
                       onClick={(e) => {
-                        e.preventDefault();
-                        showEditModal(item);
+                        e.preventDefault()
+                        showEditModal(item)
                       }}
                     >
                       编辑
@@ -262,8 +264,8 @@ export const BasicList: FC<BasicListProps> = (props) => {
         onSubmit={handleSubmit}
       />
     </div>
-  );
-};
+  )
+}
 
 export default connect(
   ({
@@ -272,10 +274,10 @@ export default connect(
   }: {
     listAndbasicList: StateType;
     loading: {
-      models: { [key: string]: boolean };
+      models: Record<string, boolean>;
     };
   }) => ({
     listAndbasicList,
     loading: loading.models.listAndbasicList,
   }),
-)(BasicList);
+)(BasicList)

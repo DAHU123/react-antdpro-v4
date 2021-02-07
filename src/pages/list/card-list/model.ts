@@ -1,7 +1,7 @@
-import { Effect, Reducer } from 'umi';
+import type { Effect, Reducer } from 'umi'
 
-import { CardListItemDataType } from './data.d';
-import { queryFakeList } from './service';
+import type { CardListItemDataType } from './data.d'
+import { queryFakeList } from './service'
 
 export interface StateType {
   list: CardListItemDataType[];
@@ -27,11 +27,11 @@ const Model: ModelType = {
 
   effects: {
     *fetch({ payload }, { call, put }) {
-      const response = yield call(queryFakeList, payload);
+      const response = yield call(queryFakeList, payload)
       yield put({
         type: 'queryList',
         payload: Array.isArray(response) ? response : [],
-      });
+      })
     },
   },
 
@@ -40,9 +40,9 @@ const Model: ModelType = {
       return {
         ...state,
         list: action.payload,
-      };
+      }
     },
   },
-};
+}
 
-export default Model;
+export default Model
